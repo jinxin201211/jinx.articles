@@ -1,4 +1,4 @@
-### 在SpringBoot中，实现从数据库中读取配置，并且不重启程序动态更新配置
+### <center>在SpringBoot中，实现从数据库中读取配置，并且不重启程序动态更新配置</center>
 
 [在Spring-boot中，为@Value注解添加从数据库读取properties支持](https://www.shuzhiduo.com/A/l1dypylA5e/)
 
