@@ -79,7 +79,7 @@
     }
 ```
 
-至此，就实现了`@Value`从数据库加载配置值，接下来就要解决如何在程序运行时更新@Value的值。这时候就需要用到`@RefreshScope`注解，刷新时一种方式是使用`spring-boot-starter-actuator`提供的HTTP接口`actuator/refresh`来刷新配置值，但是这种方法不会主动去更新dbPropertySource中的属性，所以我们就需要自己重新读取数据库去更新dbPropertySource，然后再刷新@Value，具体代码如下：
+至此，就实现了`@Value`从数据库加载配置值，接下来就要解决如何在程序运行时更新`@Value`的值。这时候就需要用到`@RefreshScope`注解，刷新时一种方式是使用`spring-boot-starter-actuator`提供的HTTP接口`actuator/refresh`来刷新配置值，但是这种方法不会主动去更新dbPropertySource中的属性，所以我们就需要自己重新读取数据库去更新dbPropertySource，然后再刷新`@Value`，具体代码如下：
 
 ```java
 @RestController

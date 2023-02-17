@@ -1,5 +1,7 @@
 ## <center>**[Java] 005.Java并发包CountDownLatch、CyclicBarrier和Semaphore的使用**</center>
 
+[Java并发包CountDownLatch、CyclicBarrier、Semaphore原理解析](https://baijiahao.baidu.com/s?id=1667358787034051395&wfr=spider&for=pc)
+
 ### 一、 CountDownLatch
 
 `CountDownLatch`可以理解为是同步计数器，作用是允许一个或多个线程等待其他线程执行完成之后才继续执行，比如打dota、LoL或者王者荣耀时，创建了一个五人房，只有当五个玩家都准备了之后，游戏才能正式开始，否则游戏主线程会一直等待着直到玩家全部准备。在玩家没准备之前，游戏主线程会一直处于等待状态。如果把CountDownLatch比做此场景都话，相当于开始定义了匹配游戏需要5个线程，只有当5个线程都准备完成了之后，主线程才会开始进行匹配操作。
