@@ -27,30 +27,38 @@ public class Server {
 
         server.bind(new InetSocketAddress(2233));
 
-        ByteBuffer buffer = ByteBuffer.allocate(16);
+//        ByteBuffer buffer = ByteBuffer.allocate(16);
         while (true) {
             selector.select();
             Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
             if (iterator.hasNext()) {
                 SelectionKey selectionKey = iterator.next();
-                log.info("key: {}", selectionKey);
+//                log.info("key: {}", selectionKey);
 
                 if (selectionKey.isAcceptable()) {
                     ServerSocketChannel selectServer = (ServerSocketChannel) selectionKey.channel();
                     SocketChannel channel = selectServer.accept();
                     channel.configureBlocking(false);
 
-                    SelectionKey channelKey = channel.register(selector, 0, null);
+                    ByteBuffer buffer = ByteBuffer.allocate(16);
+                    SelectionKey channelKey = channel.register(selector, 0, buffer);
                     channelKey.interestOps(SelectionKey.OP_READ);
                     log.info("channel: {}", channel);
                 } else if (selectionKey.isReadable()) {
                     try {
                         SocketChannel channel = (SocketChannel) selectionKey.channel();
+                        ByteBuffer buffer = (ByteBuffer) selectionKey.attachment();
                         int read = channel.read(buffer);
                         if (read == -1) {
                             selectionKey.cancel();
                         } else {
                             splitBuffer(buffer);
+                            if (buffer.position() == buffer.limit()) {
+                                ByteBuffer buffernew = ByteBuffer.allocate(buffer.capacity() * 2);
+                                buffer.flip();
+                                buffernew.put(buffer);
+                                selectionKey.attach(buffernew);
+                            }
 //                            buffer.flip();
 //                            debugRead(buffer);
 //                            buffer.clear();
