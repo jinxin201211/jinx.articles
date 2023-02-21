@@ -1,8 +1,8 @@
-## <center>**使用javassist动态创建Java类**</center>
+## <center>**使用 javassist 动态创建 Java 类**</center>
 
-需求背景：我们有一些数据需要第三方提供，第三方是通过WebService的方式通知我们可以拉取数据，WebService服务确定了请求和返回的格式，只能通过WebService方法名来区分应该拉取哪张表，并且数据库表可能会有变化，所以需要WebService和数据库表名做成可配置的。
+需求背景：我们有一些数据需要第三方提供，第三方是通过 WebService 的方式通知我们可以拉取数据，WebService 服务确定了请求和返回的格式，只能通过 WebService 方法名来区分应该拉取哪张表，并且数据库表可能会有变化，所以需要 WebService 和数据库表名做成可配置的。
 
-动态创建WebService类的方法：
+动态创建 WebService 类的方法：
 
 ```java
 public class DynamicWebserviceGenerator {
@@ -72,7 +72,7 @@ public class DynamicWebserviceGenerator {
 }
 ```
 
-WebService基类：
+WebService 基类：
 
 ```java
 @Component
