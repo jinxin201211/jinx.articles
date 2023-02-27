@@ -1,4 +1,4 @@
-package com.jinx.testnetty._012BlockingPattern;
+package com.jinx.testnio._012BlockingPattern;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -10,7 +10,7 @@ import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.jinx.testnetty.ByteBufferUtil.debugRead;
+import static com.jinx.testnio.ByteBufferUtil.debugRead;
 
 @Slf4j
 public class Server {

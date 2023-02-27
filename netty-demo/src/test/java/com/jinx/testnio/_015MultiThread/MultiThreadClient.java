@@ -1,4 +1,4 @@
-package com.jinx.testnetty._015MultiThread;
+package com.jinx.testnio._015MultiThread;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

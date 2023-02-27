@@ -1,9 +1,8 @@
-package com.jinx.testnetty;
+package com.jinx.testnio;
 
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class _011TestWalkFileTreeDelete {
     public static void main(String[] args) throws IOException {

@@ -1,4 +1,4 @@
-package com.jinx.testnetty._013Selector;
+package com.jinx.testnio._013Selector;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -6,13 +6,9 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
 
 import static com.jinx.nettydemo.base.ByteBufferUtil.debugAll;
-import static com.jinx.testnetty.ByteBufferUtil.debugRead;
 
 @Slf4j
 public class Server {

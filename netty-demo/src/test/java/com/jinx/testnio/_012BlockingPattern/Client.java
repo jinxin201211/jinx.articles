@@ -1,4 +1,4 @@
-package com.jinx.testnetty._012BlockingPattern;
+package com.jinx.testnio._012BlockingPattern;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

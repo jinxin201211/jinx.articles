@@ -1,4 +1,4 @@
-package com.jinx.testnetty;
+package com.jinx.testnio;
 
 import io.netty.util.internal.StringUtil;
 import lombok.extern.slf4j.Slf4j;

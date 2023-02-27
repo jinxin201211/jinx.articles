@@ -1,4 +1,4 @@
-package com.jinx.testnetty;
+package com.jinx.testnio;
 
 import java.nio.ByteBuffer;
 
