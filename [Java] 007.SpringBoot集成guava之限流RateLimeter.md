@@ -95,7 +95,7 @@ public class GuavaRateLimiterAspect {
 @Slf4j
 public class TestController {
     @GetMapping("/rateLimiter")
-    @GuavaRateLimiter(value = 2, timeout = 0)
+    @GuavaRateLimiter(value = 1, timeout = 100)
     public String rateLimiter() {
         return "success";
     }
@@ -104,6 +104,45 @@ public class TestController {
 
 **2.5. 测试**
 
-可以看到当我们连续点击的时候 会被限流,就这样单机限流配置成功.
+测试代码
+
+```java
+@SpringBootTest
+@RunWith(SpringRunner.class)
+public class DemoApplicationTest {
+    @Resource
+    private TestController testController;
+
+    @Test
+    public void testLimiter() throws InterruptedException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        for (int i = 0; i < 10; i++) {
+            System.out.println("[" + dateFormat.format(new Date()) + "] " + i + ": " + testController.rateLimiter());
+            Thread.sleep(200l);
+        }
+    }
+}
+```
+
+测试配置`@GuavaRateLimiter(value = 1, timeout = 0)`，结果：
+
+![CountDownLatch](/imgs/ratelimiter/Snipaste_2023-06-05_17-22-03.jpg)
+
+测试配置`@GuavaRateLimiter(value = 1, timeout = 200)`，结果：
+
+![CountDownLatch](/imgs/ratelimiter/Snipaste_2023-06-05_17-23-03.jpg)
+
+
+测试配置`@GuavaRateLimiter(value = 1, timeout = 500)`，结果：
+
+![CountDownLatch](/imgs/ratelimiter/Snipaste_2023-06-05_17-23-32.jpg)
+
+
+测试配置`@GuavaRateLimiter(value = 1, timeout = 1000)`，结果：
+
+![CountDownLatch](/imgs/ratelimiter/Snipaste_2023-06-05_17-24-06.jpg)
+
+
+
  
 [总结]:集成guava实现限流,简单,方便,便于理解. 不足是在单机版的限流比较局限,有的时候没法适合业务,所以在选择上我们要根据具体的业务场景去选择

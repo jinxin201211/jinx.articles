@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class TestController {
     @GetMapping("/rateLimiter")
-    @GuavaRateLimiter(value = 2, timeout = 0)
+    @GuavaRateLimiter(value = 1, timeout = 200)
     public String rateLimiter() {
         return "success";
     }

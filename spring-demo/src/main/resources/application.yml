@@ -4,4 +4,4 @@ server:
 
 logging:
   level:
-    com.jinx.springdemo: debug
+    com.jinx.springdemo: error
