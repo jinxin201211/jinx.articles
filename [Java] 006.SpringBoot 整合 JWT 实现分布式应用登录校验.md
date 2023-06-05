@@ -1,4 +1,4 @@
-## <center>**[Java] 006.SpringBoot 整合 JWT 实现分布式应用登录校验**</center>
+## <center>**SpringBoot 整合 JWT 实现分布式应用登录校验**</center>
 
 ### **JWT 入门介绍**
 
