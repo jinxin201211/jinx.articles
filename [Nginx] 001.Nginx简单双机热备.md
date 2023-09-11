@@ -2,8 +2,8 @@
 
 ```conf
 upstream  testproxy  {
-        server   127.0.0.1:8080;
-        server   192.168.1.15:8080 backup;
+    server   127.0.0.1:8080;
+    server   192.168.1.15:8080 backup;
 }
 ```
 
