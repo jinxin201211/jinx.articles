@@ -3,3 +3,5 @@ spring-demo/target
 spring-demo/.idea
 *.iml
 rebel.xml
+jvm.demo/out/
+.idea
