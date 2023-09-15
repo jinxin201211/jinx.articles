@@ -118,7 +118,7 @@
 
 执行结果如下：
 
-![CyclicBarrier](/imgs/concurrent/semaphore.png)
+![Semaphore](/imgs/concurrent/semaphore.png)
 
 可以看出前 5 个线程可以直接占用窗口，但是后 5 个线程需要等待前面的线程离开了窗口之后才可占用窗口。
 
