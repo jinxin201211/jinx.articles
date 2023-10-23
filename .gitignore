@@ -5,3 +5,6 @@ spring-demo/.idea
 rebel.xml
 jvm.demo/out/
 .idea
+jvm.demo/target
+jvm.demo/lib
+kotlin-demo/target

@@ -1,6 +1,14 @@
 package com.jinx.test.Heap;
 
 public class StackAllocateTest {
+    /**
+     * The main program.
+     *
+     * The code calls the following statement:
+     * <pre>{@code
+     *   System.out.println("Hello, World!");
+     * }</pre>
+     */
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
 
