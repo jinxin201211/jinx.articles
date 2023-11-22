@@ -48,8 +48,51 @@ public class StringTest4 {
         String str2 = "b";
         String str3 = "ab";
         String str4 = str1 + str2;
-        System.out.println(str3 == str4);
-        System.out.println(str3 == "ab");
-        System.out.println(str4 == "ab");
+        System.out.println(str3 == str4); //false
+        System.out.println(str3 == "ab"); //true
+        System.out.println(str4 == "ab"); //false
+
+        final String str6 = "a";
+        String str7 = str6 + "b";
+        System.out.println(str3 == str7); //true
+    }
+
+    @Test
+    public void test4() {
+        int loopCount = 100000;
+        long begin1 = System.currentTimeMillis();
+        concatMethod1(loopCount);
+        long end1 = System.currentTimeMillis();
+        System.out.println(loopCount + "耗时：" + (end1 - begin1) + "ms");
+
+        long begin2 = System.currentTimeMillis();
+        concatMethod2(loopCount);
+        long end2 = System.currentTimeMillis();
+        System.out.println(loopCount + "耗时：" + (end2 - begin2) + "ms");
+    }
+
+    public void concatMethod1(int loopCount) {
+        String str = "";
+        for (int i = 0; i < loopCount; i++) {
+            str += "a";
+        }
+    }
+
+    public void concatMethod2(int loopCount) {
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < loopCount; i++) {
+            str.append("a");
+        }
+    }
+
+    @Test
+    public void test5() {
+        String str1 = "a";
+        String str2 = "b";
+        String str3 = "ab";
+        String str4 = (str1 + str2).intern();
+        System.out.println(str3 == str4); //true
+        System.out.println(str3 == "ab"); //true
+        System.out.println(str4 == "ab"); //true
     }
 }
