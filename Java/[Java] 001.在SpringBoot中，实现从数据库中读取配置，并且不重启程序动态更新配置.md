@@ -89,7 +89,7 @@ public class SysReloadConfigController {
     @Resource
     private org.springframework.cloud.context.scope.refresh.RefreshScope scope;
 
-    @PostMapping("/resload")
+    @PostMapping("/reload")
     public HttpResult reloadConfig() throws Exception {
         reloadConfig();//LoadFromDatabasePropertyConfig.initializeDatabasePropertySourceUsage单独抽出的公共方法
         scope.refreshAll();
