@@ -104,7 +104,7 @@ public interface ConfigurableApplicationContext extends ApplicationContext, Life
             }
         }
 
-        return (ConfigurableApplicationContext)BeanUtils.instantiateClass(contextClass);
+        return (ConfigurableApplicationContext) BeanUtils.instantiateClass(contextClass);
     }
 ```
 
@@ -125,10 +125,10 @@ spring.application.name=SPRING-BOOT-APPLICATION
 ```java
 public class ExampleRestartApplication {
 
-    @Value ( "${spring.application.name}" )
+    @Value("${spring.application.name}")
     String appName;
 
-    private static Logger logger = LoggerFactory.getLogger ( ExampleRestartApplication.class );
+    private static Logger logger = LoggerFactory.getLogger(ExampleRestartApplication.class);
 
     private static String[] args;
     private static ConfigurableApplicationContext context;
@@ -144,21 +144,21 @@ public class ExampleRestartApplication {
 
 ```java
   @GetMapping("/refresh")
-  public String restart(){
-      logger.info ( "spring.application.name:"+appName);
+  public String restart() {
+      logger.info("spring.application.name:"+appName);
       try {
-          PropUtil.init ().write ( "spring.application.name","SPRING-DYNAMIC-SERVER" );
+          PropUtil.init().write("spring.application.name", "SPRING-DYNAMIC-SERVER");
       } catch (IOException e) {
-          e.printStackTrace ( );
+          e.printStackTrace();
       }
 
-      ExecutorService threadPool = new ThreadPoolExecutor (1,1,0, TimeUnit.SECONDS,new ArrayBlockingQueue<> ( 1 ),new ThreadPoolExecutor.DiscardOldestPolicy ());
-      threadPool.execute (()->{
-          context.close ();
-          context = SpringApplication.run ( ExampleRestartApplication.class,args );
+      ExecutorService threadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<>(1), new ThreadPoolExecutor.DiscardOldestPolicy());
+      threadPool.execute(()->{
+          context.close();
+          context = SpringApplication.run(ExampleRestartApplication.class,args);
       } );
-      threadPool.shutdown ();
-      return "spring.application.name:"+appName;
+      threadPool.shutdown();
+      return "spring.application.name:" + appName;
   }
 ```
 
@@ -169,7 +169,7 @@ public class ExampleRestartApplication {
 ```java
   @GetMapping("/info")
   public String info(){
-      logger.info ( "spring.application.name:"+appName);
+      logger.info("spring.application.name:" + appName);
       return appName;
   }
 ```
@@ -200,10 +200,10 @@ import java.util.concurrent.*;
 @RestController
 public class ExampleRestartApplication {
 
-    @Value ( "${spring.application.name}" )
+    @Value("${spring.application.name}")
     String appName;
 
-    private static Logger logger = LoggerFactory.getLogger ( ExampleRestartApplication.class );
+    private static Logger logger = LoggerFactory.getLogger(ExampleRestartApplication.class);
 
     private static String[] args;
     private static ConfigurableApplicationContext context;
@@ -214,26 +214,26 @@ public class ExampleRestartApplication {
     }
 
     @GetMapping("/refresh")
-    public String restart(){
-        logger.info ( "spring.application.name:"+appName);
+    public String restart() {
+        logger.info("spring.application.name:" + appName);
         try {
-            PropUtil.init ().write ( "spring.application.name","SPRING-DYNAMIC-SERVER" );
+            PropUtil.init ().write("spring.application.name", "SPRING-DYNAMIC-SERVER");
         } catch (IOException e) {
-            e.printStackTrace ( );
+            e.printStackTrace();
         }
 
-        ExecutorService threadPool = new ThreadPoolExecutor (1,1,0, TimeUnit.SECONDS,new ArrayBlockingQueue<> ( 1 ),new ThreadPoolExecutor.DiscardOldestPolicy ());
-        threadPool.execute (()->{
+        ExecutorService threadPool = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<>(1), new ThreadPoolExecutor.DiscardOldestPolicy());
+        threadPool.execute(()->{
             context.close ();
-            context = SpringApplication.run ( ExampleRestartApplication.class,args );
-        } );
-        threadPool.shutdown ();
-        return "spring.application.name:"+appName;
+            context = SpringApplication.run(ExampleRestartApplication.class, args);
+        });
+        threadPool.shutdown();
+        return "spring.application.name:" + appName;
     }
 
     @GetMapping("/info")
-    public String info(){
-        logger.info ( "spring.application.name:"+appName);
+    public String info() {
+        logger.info("spring.application.name:" + appName);
         return appName;
     }
 }
