@@ -95,8 +95,11 @@ public class StringTest4 {
         System.out.println(str3 == "ab"); //true
         System.out.println(str4 == "ab"); //true
         String str5 = str1 + str2;
+        System.out.println(str3 == str5); //false
         str5.intern();
         System.out.println(str3 == str5); //false
+        str5 = str5.intern();
+        System.out.println(str3 == str5); //true
 
         String str6 = new String(str1 + str2);
         System.out.println(str3 == str6); //false
