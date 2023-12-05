@@ -1,12 +1,12 @@
-## <center>**SpringBoot集成guava之限流RateLimeter**</center>
+# $$SpringBoot集成guava之限流RateLimeter$$
 
-**1. 前言**
+## **1. 前言**
 
 Guava工程包含了若干被Google的 Java项目广泛依赖 的核心库，例如：集合 [collections] 、缓存 [caching] 、原生类型支持 [primitives support] 、并发库 [concurrency libraries] 、通用注解 [common annotations] 、字符串处理 [string processing] 、I/O 等等。
 
-**2. springBoot集成rateLimeter实现单机限流**
+## **2. springBoot集成rateLimeter实现单机限流**
 
-**2.1. 引入guava依赖**
+### **2.1. 引入guava依赖**
 
 ``` xml
 <dependency>
@@ -16,7 +16,7 @@ Guava工程包含了若干被Google的 Java项目广泛依赖 的核心库，例
 </dependency>
 ```
 
-**2.2. 自定义限流注解**
+### **2.2. 自定义限流注解**
 
 ``` java
 @Target(ElementType.METHOD)
@@ -49,7 +49,7 @@ public @interface GuavaRateLimiter {
 
 ```
 
-**2.3. 定义限流切面**
+### **2.3. 定义限流切面**
 
 ``` java
 @Slf4j
@@ -87,7 +87,7 @@ public class GuavaRateLimiterAspect {
 }
 ```
 
-**2.4. 定义Controller进行测试**
+### **2.4. 定义Controller进行测试**
 
 ```java
 @RestController
@@ -102,7 +102,7 @@ public class TestController {
 }
 ```
 
-**2.5. 测试**
+### **2.5. 测试**
 
 测试代码
 
@@ -132,17 +132,10 @@ public class DemoApplicationTest {
 
 ![CountDownLatch](/imgs/ratelimiter/Snipaste_2023-06-05_17-23-03.jpg)
 
-
 测试配置`@GuavaRateLimiter(value = 1, timeout = 500)`，结果：
 
 ![CountDownLatch](/imgs/ratelimiter/Snipaste_2023-06-05_17-23-32.jpg)
 
-
 测试配置`@GuavaRateLimiter(value = 1, timeout = 1000)`，结果：
 
 ![CountDownLatch](/imgs/ratelimiter/Snipaste_2023-06-05_17-24-06.jpg)
-
-
-
- 
-[总结]:集成guava实现限流,简单,方便,便于理解. 不足是在单机版的限流比较局限,有的时候没法适合业务,所以在选择上我们要根据具体的业务场景去选择

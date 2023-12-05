@@ -1,8 +1,8 @@
-## <center>**Java 并发包 CountDownLatch、CyclicBarrier 和 Semaphore 的使用**</center>
+# $$Java 并发包 CountDownLatch、CyclicBarrier 和 Semaphore 的使用$$
 
 [Java 并发包 CountDownLatch、CyclicBarrier、Semaphore 原理解析](https://baijiahao.baidu.com/s?id=1667358787034051395&wfr=spider&for=pc)
 
-### 一、 CountDownLatch
+## 一、 CountDownLatch
 
 `CountDownLatch`可以理解为是同步计数器，作用是允许一个或多个线程等待其他线程执行完成之后才继续执行，比如打 dota、LoL 或者王者荣耀时，创建了一个五人房，只有当五个玩家都准备了之后，游戏才能正式开始，否则游戏主线程会一直等待着直到玩家全部准备。在玩家没准备之前，游戏主线程会一直处于等待状态。如果把 CountDownLatch 比做此场景都话，相当于开始定义了匹配游戏需要 5 个线程，只有当 5 个线程都准备完成了之后，主线程才会开始进行匹配操作。
 
@@ -53,7 +53,7 @@
 
 本案例中有两个线程都调用了`countDownLatch.await()`方法，则这两个线程都会被阻塞，直到条件达成。当 5 个线程调用`countDown`方法之后，达到了计数器的要求，则后续再执行`countDown`方法的效果就无效了，因为`CountDownLatch`仅一次有效。
 
-### 二、 CyclicBarrier
+## 二、 CyclicBarrier
 
 `CyclicBarrier`可以理解为一个循环同步屏障，定义一个同步屏障之后，当一组线程都全部达到同步屏障之前都会被阻塞，直到最后一个线程达到了同步屏障之后才会被打开，其他线程才可继续执行。
 
@@ -89,7 +89,7 @@
 
 另外`CyclicBarrier`是循环同步屏障，同步屏障打开之后立马会继续计数，等待下一组线程达到同步屏障。而`CountDownLatch`仅单次有效。
 
-### 三、 Semaphore
+## 三、 Semaphore
 
 `Semaphore`字面意思是信号量，实际可以看作是一个限流器，初始化`Semaphore`时就定义好了最大通行证数量，每次调用时调用方法来消耗，业务执行完毕则释放通行证，如果通行证消耗完，再获取通行证时就需要阻塞线程直到有通行证可以获取。
 

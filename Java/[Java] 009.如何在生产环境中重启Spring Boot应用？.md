@@ -1,4 +1,4 @@
-## **<center>如何在生产环境中重启Spring Boot应用？</center>**
+# $$如何在生产环境中重启Spring Boot应用？$$
 
 转载自 [如何在生产环境中重启Spring Boot应用？](https://segmentfault.com/a/1190000018858017)
 
@@ -241,24 +241,24 @@ public class ExampleRestartApplication {
 
 接下来，运行Spring Boot程序，下面是应用程序启动成功后控制台输出的日志信息：
 
-```
+```log
 [2019-03-12T19:05:53.053z][org.springframework.scheduling.concurrent.ExecutorConfigurationSupport][main][171][INFO ] Initializing ExecutorService 'applicationTaskExecutor'
 [2019-03-12T19:05:53.053z][org.apache.juli.logging.DirectJDKLog][main][173][INFO ] Starting ProtocolHandler ["http-nio-8080"]
 [2019-03-12T19:05:53.053z][org.springframework.boot.web.embedded.tomcat.TomcatWebServer][main][204][INFO ] Tomcat started on port(s): 8080 (http) with context path ''
 [2019-03-12T19:05:53.053z][org.springframework.boot.StartupInfoLogger][main][59][INFO ] Started ExampleRestartApplication in 1.587 seconds (JVM running for 2.058)
 ```
 
-在测试修改系统配置并重启之前，使用Postman测试工具访问：http://localhost:8080/info ，查看一下返回的信息：
+在测试修改系统配置并重启之前，使用Postman测试工具访问：<http://localhost:8080/info> ，查看一下返回的信息：
 
 ![001](/imgs/java009/001.png)
 
 成功返回`SPRING-BOOT-APPLICATION`提示信息。
 
-然后，访问：http://localhost:8080/refresh ，设置应用应用程序`spring.application.name`的值为`SPRING-DYNAMIC-SERVER`，观察控制台输出的日志信息：
+然后，访问：<http://localhost:8080/refresh> ，设置应用应用程序`spring.application.name`的值为`SPRING-DYNAMIC-SERVER`，观察控制台输出的日志信息：
 
 ![002](/imgs/java009/002.png)
 
-可以看到，Spring Boot应用程序已经重新启动成功，最后，在此访问：http://localhost:8080/info ,验证之前的修改是否生效：
+可以看到，Spring Boot应用程序已经重新启动成功，最后，在此访问：<http://localhost:8080/info> ,验证之前的修改是否生效：
 
 ![003](/imgs/java009/003.png)
 
