@@ -17,7 +17,7 @@
                     .baseUrl(baseUrl)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
-        return retrofit.create(BusinessClient .class);
+        return retrofit.create(BusinessClient.class);
     }
 ```
 
