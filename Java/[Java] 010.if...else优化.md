@@ -133,8 +133,11 @@ action.put("code5", () -> { doAction5() });
 
 // 使用
 actionMap.get(action).apply();
+```
+
 其实这种方式也不是很好，因为它会显得代码非常臃肿。一种变形方案是将 doAction() 抽象成类。如下：
 
+```java
 //1. 先定义一个 ActionService 接口
 public interface ActionService {
     void doAction();
@@ -176,13 +179,13 @@ public interface ActionService {
 - 根据每个逻辑，定义出自己具体的策略实现类，如下：
 
 ```java
-public class ActionService1 implements ActionService{
+public class ActionService1 implements ActionService {
     public void doAction() {
         //do something
     }
 }
 
-public class ActionService2 implements ActionService{
+public class ActionService2 implements ActionService {
     public void doAction() {
         //do something
     }
@@ -200,7 +203,7 @@ public class ActionServiceFactory {
     }
 
     private static class SingletonHolder {
-        private static ActionServiceFactory instance=new ActionServiceFactory();
+        private static ActionServiceFactory instance = new ActionServiceFactory();
     }
 
     public static ActionServiceFactory getInstance() {
@@ -251,7 +254,6 @@ ActionServiceFactory.getInstance().doAction("action1");
 
 ```java
 public abstract class ActionHandler {
-
     // 后继节点
     protected ActionHandler successor;
 
@@ -291,8 +293,7 @@ public class HeadHandler extends ActionHandler{
 }
 
 // 尾节点，直接抛出异常，因为到了尾节点说明当前 code 没有处理
-public class TailHandler extends ActionHandler{
-
+public class TailHandler extends ActionHandler {
     @Override
     public void doHandler(String actionCode) {
         throw new RuntimeException("当前 code[" + actionCode + "] 没有具体的 Handler 处理");
@@ -317,7 +318,6 @@ public class ActionHandler1 extends ActionHandler{
 }
 
 public class ActionHandler2 extends ActionHandler{
-
     @Override
     public void doHandler(String actionCode) {
         if ("action2".equals(actionCode)) {
@@ -335,10 +335,9 @@ public class ActionHandler2 extends ActionHandler{
 
 ```java
 public class ActionHandlerFactory {
-    
     private ActionHandler headHandler;
     
-    private ActionHandlerFactory(){
+    private ActionHandlerFactory() {
         headHandler = new HeadHandler();
         ActionHandler actionHandler1 = new ActionHandler1();
         ActionHandler actionHandler2 = new ActionHandler2();
@@ -349,15 +348,19 @@ public class ActionHandlerFactory {
         ActionHandler tailHandler = new TailHandler();
         
         // 构建一条完整的责任链
-        headHandler.setSuccessor(actionHandler1).setSuccessor(actionHandler2).setSuccessor(actionHandler3).
-                setSuccessor(actionHandler4).setSuccessor(actionHandler5).setSuccessor(tailHandler);
+        headHandler.setSuccessor(actionHandler1)
+            .setSuccessor(actionHandler2)
+            .setSuccessor(actionHandler3)
+            .setSuccessor(actionHandler4)
+            .setSuccessor(actionHandler5)
+            .setSuccessor(tailHandler);
     }
 
-    private static class SingletonHolder{
+    private static class SingletonHolder {
         private static ActionHandlerFactory instance = new ActionHandlerFactory();
     }
 
-    public static ActionHandlerFactory getInstance(){
+    public static ActionHandlerFactory getInstance() {
         return SingletonHolder.instance;
     }
         
@@ -400,7 +403,6 @@ if (...) {
 ```java
 @FunctionalInterface
 public interface ThrowExceptionFunction {
-
     /**
      * 抛出异常
      * @param message
@@ -415,7 +417,6 @@ public interface ThrowExceptionFunction {
 
 ```java
 public class ValidateUtils {
-
     /**
      * 抛出异常
      * @param flag
@@ -450,7 +451,7 @@ ValidateUtils.isTrue(flag).throwMessage("哎呀，有异常哦...");
 ```java
 @FunctionalInterface
 public interface ActionHandler {
-    void doActionHandler(ActionService trueActionService,ActionService falseActionService);
+    void doActionHandler(ActionService trueActionService, ActionService falseActionService);
 }
 ```
 
@@ -463,12 +464,10 @@ public interface ActionHandler {
 
 增加一个工具类，用来判断为 `true` 时执行哪个方法，为 `false` 时执行哪个方法。
 
-
 ```java
 public class ActionHandlerUtils {
-
     public static ActionHandler isTrue(Boolean flag) {
-        return (trueActionService,falseActionService) -> {
+        return (trueActionService, falseActionService) -> {
             if (flag) {
                 trueActionService.doAction();
             } else {
@@ -485,13 +484,13 @@ public class ActionHandlerUtils {
 ActionHandlerUtils.isTrue(true)
         .doActionHandler(() -> {
             //do true Something
-        },() ->{
+        }, () ->{
             //do false Something
         });
 ```
 
 ## 总结
 
-在这里总结了 7 中方式用来解决  `if...else` 的问题，我相信里面总有一两种方案是你比较满意的，七种方案各有优劣，各自有各自的使用场景，我们需要在实践中不断领悟，在重构中不断进化，总结出适合自己最佳的重构方案。
+在这里总结了 7 中方式用来解决 `if...else` 的问题，我相信里面总有一两种方案是你比较满意的，七种方案各有优劣，各自有各自的使用场景，我们需要在实践中不断领悟，在重构中不断进化，总结出适合自己最佳的重构方案。
 
 > 重构之路，任重而道远，各位其行且珍惜
