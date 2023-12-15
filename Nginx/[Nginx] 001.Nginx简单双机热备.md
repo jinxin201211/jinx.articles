@@ -1,4 +1,4 @@
-## <center>**[Nginx] 001.Nginx 简单双机热备**</center>
+# $$[Nginx] 001.Nginx 简单双机热备$$
 
 ```conf
 upstream  testproxy  {
