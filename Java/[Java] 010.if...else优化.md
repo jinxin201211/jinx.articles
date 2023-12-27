@@ -51,11 +51,11 @@ if ("1".equals(orderStatus)) {
 @Getter
 @AllArgsConstructor
 public enum OrderStatusEnum {
-    UN_PAID("1","订单未支付"),
-    PAIDED("2","订单已支付"),
-    SENDED("3","订单已发货"),
-    SINGED("4","订单已签收"),
-    EVALUATED("5","订单已评价");
+    UN_PAID("1", "订单未支付"),
+    PAIDED("2", "订单已支付"),
+    SENDED("3", "订单已发货"),
+    SINGED("4", "订单已签收"),
+    EVALUATED("5", "订单已评价");
 
     private String status;
 
