@@ -1,5 +1,7 @@
 # $$SpringBoot启动后执行方法$$
 
+转载自 [Springboot启动后执行方法（4种）](https://www.cnblogs.com/lizm166/p/16542073.html)
+
 ## 一、注解@PostConstruct
 
 使用注解 `@PostConstruct` 是最常见的一种方式，存在的问题是如果执行的方法耗时过长，会导致项目在方法执行期间无法提供服务。
@@ -7,7 +9,6 @@
 ```java
 @Component
 public class StartInit {
-//
 //    @Autowired   可以注入bean
 //    ISysUserService userService;
 
