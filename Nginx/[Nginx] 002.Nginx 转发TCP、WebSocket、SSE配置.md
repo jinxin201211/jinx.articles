@@ -1,4 +1,4 @@
-# $$[Nginx] 002.Nginx 转发TCP、WebSocket、SSE配置$$
+# $Nginx 转发TCP、WebSocket、SSE配置$
 
 [使用Nginx为TCP/WebSocket协议做反向代理和几个易踩的坑](https://blog.csdn.net/CharlesSimonyi/article/details/90122916)
 

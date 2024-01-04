@@ -1,4 +1,4 @@
-# $$在 SpringBoot 中，实现从数据库中读取配置，并且不重启程序动态更新配置$$
+# $在 SpringBoot 中，实现从数据库中读取配置，并且不重启程序动态更新配置$
 
 [在 Spring-boot 中，为@Value 注解添加从数据库读取 properties 支持](https://www.shuzhiduo.com/A/l1dypylA5e/)
 

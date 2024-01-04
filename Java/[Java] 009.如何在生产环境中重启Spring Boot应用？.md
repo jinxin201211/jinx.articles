@@ -1,4 +1,4 @@
-# $$如何在生产环境中重启Spring Boot应用？$$
+# $如何在生产环境中重启Spring Boot应用？$
 
 转载自 [如何在生产环境中重启Spring Boot应用？](https://segmentfault.com/a/1190000018858017)
 

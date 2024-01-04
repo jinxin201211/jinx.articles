@@ -1,4 +1,4 @@
-# $$SpringBoot 整合 JWT 实现分布式应用登录校验$$
+# $SpringBoot 整合 JWT 实现分布式应用登录校验$
 
 ## **JWT 入门介绍**
 

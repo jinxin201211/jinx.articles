@@ -1,4 +1,4 @@
-# $$SpringBoot集成guava之限流RateLimeter$$
+# $SpringBoot集成guava之限流RateLimeter$
 
 ## **1. 前言**
 

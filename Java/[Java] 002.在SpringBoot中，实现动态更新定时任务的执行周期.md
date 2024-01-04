@@ -1,4 +1,4 @@
-# $$在 SpringBoot 中，实现动态更新定时任务的执行周期$$
+# $在 SpringBoot 中，实现动态更新定时任务的执行周期$
 
 [解决 @RefreshScope 导致定时任务注解 @Scheduled 失效](https://blog.csdn.net/u012410733/article/details/125985361)
 
