@@ -4,41 +4,51 @@ import lombok.Getter;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 public class CompletableFutureMallDemo {
-    static List<Mall> malls = Arrays.asList(new Mall("京东"), new Mall("淘宝"), new Mall("拼多多"));
+    static List<Mall> malls = Arrays.asList(new Mall("京东"), new Mall("淘宝"), new Mall("拼多多"), new Mall("天猫"), new Mall("抖音"));
 
-    private static List<String> getPrices(List<Mall> malls, String product) {
+    private static List<String> getPrices1(List<Mall> malls, String product) {
+        return malls
+                .stream()
+                .map(p -> String.format("在%s购物，商品%s的价格是：%.2f",
+                        p.getName(),
+                        product,
+                        p.getPrice(product))
+                )
+                .collect(Collectors.toList());
+    }
+
+    private static List<String> getPrices2(List<Mall> malls, String product) {
         return malls
                 .stream()
                 .map(p ->
-                        String.format("在%s购物，商品%s的价格是：%.2f",
-                                p.getName(),
-                                product,
-                                p.getPrice(product)))
+                        CompletableFuture.supplyAsync(() ->
+                                String.format("在%s购物，商品%s的价格是：%.2f",
+                                        p.getName(),
+                                        product,
+                                        p.getPrice(product))
+                        )
+                )
+                .collect(Collectors.toList())
+                .stream()
+                .map(p -> p.join())//join是阻塞的，所以要先让任务全部完成再来join
                 .collect(Collectors.toList());
     }
 
     public static void main(String[] args) {
+        long time1 = System.currentTimeMillis();
         String product = "iPhoneX";
-
-//        Mall jingdong = new Mall("京东");
-//        Mall taobao = new Mall("淘宝");
-//        Mall pinduoduo = new Mall("拼多多");
-//
-//        double priceJingdong = jingdong.getPrice(product);
-//        double priceTaobao = taobao.getPrice(product);
-//        double pricePinduoduo = pinduoduo.getPrice(product);
-//
-//        System.out.println("在" + jingdong.getName() + "购物，商品" + product + "的价格是："
-//                + priceJingdong);
-//        System.out.println("在" + taobao.getName() + "购物，商品" + product + "的价格是："
-//                + priceTaobao);
-//        System.out.println("在" + pinduoduo.getName() + "购物，商品" + product + "的价格是："
-//                + pricePinduoduo);
-        getPrices(malls, product).forEach(System.out::println);
+        getPrices1(malls, product).forEach(System.out::println);
+        long time2 = System.currentTimeMillis();
+        System.out.println(time2 - time1);
+        time1 = time2;
+        getPrices2(malls, product).forEach(System.out::println);
+        time2 = System.currentTimeMillis();
+        System.out.println(time2 - time1);
     }
 }
 
