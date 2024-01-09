@@ -5,19 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateUtil {
-    private static final ThreadLocal<DateFormat> formatterDateTime = new ThreadLocal<DateFormat>() {
-        @Override
-        protected DateFormat initialValue() {
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        }
-    };
+    private static final ThreadLocal<DateFormat> formatterDateTime = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"));
 
-    private static final ThreadLocal<DateFormat> formatterDate = new ThreadLocal<DateFormat>() {
-        @Override
-        protected DateFormat initialValue() {
-            return new SimpleDateFormat("yyyy-MM-dd");
-        }
-    };
+    private static final ThreadLocal<DateFormat> formatterDate = ThreadLocal.withInitial(() -> new SimpleDateFormat("yyyy-MM-dd"));
 //    public static SimpleDateFormat formatterDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //    public static SimpleDateFormat formatterDate = new SimpleDateFormat("yyyy-MM-dd");
 
