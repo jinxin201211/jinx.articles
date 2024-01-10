@@ -1,16 +1,16 @@
 # $SpringBoot 整合 JWT 实现分布式应用登录校验$
 
-## **JWT 入门介绍**
+## JWT 入门介绍
 
 官网地址：[jwt.io](https://jwt.io)
 
-## **什么是 JWT？**
+## 什么是 JWT？
 
 JSON Web令牌（JWT）是一个开放标准（[RFC 7519](https://tools.ietf.org/html/rfc7519)），它定义了一种紧凑且自包含的方式，用于在各方之间安全地传输信息作为JSON对象。由于此信息是经过数字签名的，因此可以被验证和信任。可以使用秘密（使用HMAC算法）或使用RSA或ECDSA的公钥/私钥对对JWT进行签名。
 
 尽管可以对JWT进行加密以提供双方之间的保密性，但我们将重点关注已签名的令牌。签名的令牌可以验证其中包含的声明的完整性，而加密的令牌则将这些声明隐藏在其他方的面前。当使用公钥/私钥对对令牌进行签名时，签名还证明只有持有私钥的一方才是对其进行签名的一方。
 
-## **JWT 组成部分**
+## JWT 组成部分
 
 header+payload+signature
 
@@ -18,7 +18,7 @@ header+payload+signature
 - 负载：主要描述是加密对象的信息，如用户的id等，也可以加些规范里面的东西，如iss签发者，exp 过期时间，sub 面向的用户
 - 签名：主要是把前面两部分进行加密，防止别人拿到token进行base解密后篡改token
 
-## **JWT 优缺点**
+## JWT 优缺点
 
 - 优点
   - 生产的token可以包含基本信息，比如id、用户昵称、头像等信息，避免再次查库
@@ -27,9 +27,9 @@ header+payload+signature
   - token是经过base64编码，所以可以解码，因此token加密前的对象不应该包含敏感信息，如用户权限，密码等
   - 如果没有服务端存储，则不能做登录失效处理，除非服务端改秘钥
 
-## **SpringBoot 整合 JWT**
+## SpringBoot 整合 JWT
 
-### **1、添加相关依赖、**
+### 1、添加相关依赖、
 
 ``` xml
 <!-- JWT相关 -->
@@ -40,7 +40,7 @@ header+payload+signature
 </dependency>
 ```
 
-### **2、封装 JWT Utils 工具类**
+### 2、封装 JWT Utils 工具类
 
 封装生成 token 方法
 
@@ -81,9 +81,9 @@ public static Claims checkJwt(String token){
 }
 ```
 
-## **JWT 相关问题**
+## JWT 相关问题
 
-### **JWT过期自动刷新方案介绍**
+### JWT过期自动刷新方案介绍
 
 背景
 
@@ -116,7 +116,7 @@ RefreshToken有效期可以设置长一些，例如10天、20天，作为刷新A
 优点：后端压力小，代码逻辑改动不大
 ```
 
-### **JWT令牌token泄露恶意使用解决方案**
+### JWT令牌token泄露恶意使用解决方案
 
 解密：使用互联网大厂的产品时经常遇到这个情况
 

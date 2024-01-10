@@ -33,7 +33,7 @@ public class CompletableFutureTest4 {
 
         System.out.println(CompletableFuture.supplyAsync(() -> "resultA").thenRun(() -> {
         }).join());
-        System.out.println(CompletableFuture.supplyAsync(() -> "resultA").thenAccept(r -> System.out.println(r)).join());
+        System.out.println(CompletableFuture.supplyAsync(() -> "resultA").thenAccept(System.out::println).join());
         System.out.println(CompletableFuture.supplyAsync(() -> "resultA").thenApply(r -> r + "resultB").join());
     }
 }
