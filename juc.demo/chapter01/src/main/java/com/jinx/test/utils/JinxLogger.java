@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-public class Logger {
+public class JinxLogger {
     private final static int CLASS_NAME_LENGTH = 40;
 
     private final static int THREAD_NAME_LENGTH = 15;
@@ -29,30 +29,30 @@ public class Logger {
         LEVEL_TEXT.put(LogLevel.WARN, " WARN");
         LEVEL_TEXT.put(LogLevel.ERROR, "ERROR");
 
-        CONSOLE_OUTPUT.put("TIME", (s) -> partial(ConsoleColor.BLUE.getValue(), s));
-        CONSOLE_OUTPUT.put("PID", (s) -> partial(ConsoleColor.PURPLE.getValue(), s));
-        CONSOLE_OUTPUT.put("THREAD", (s) -> partial(ConsoleColor.GREEN.getValue(), s));
-        CONSOLE_OUTPUT.put("CLASS", (s) -> partial(ConsoleColor.CYAN.getValue(), s));
+        CONSOLE_OUTPUT.put("TIME", (s) -> stain(ConsoleColor.BLUE.getValue(), s));
+        CONSOLE_OUTPUT.put("PID", (s) -> stain(ConsoleColor.PURPLE.getValue(), s));
+        CONSOLE_OUTPUT.put("THREAD", (s) -> stain(ConsoleColor.GREEN.getValue(), s));
+        CONSOLE_OUTPUT.put("CLASS", (s) -> stain(ConsoleColor.CYAN.getValue(), s));
     }
 
-    private static String partial(String color, String message) {
+    private static String stain(String color, String message) {
         return color + message + ConsoleColor.WHITE.getValue();
     }
 
     private final Class<?> clazz;
 
-    public Logger(Class<?> clazz) {
+    public JinxLogger(Class<?> clazz) {
         this.clazz = clazz;
     }
 
-    public Logger() {
+    public JinxLogger() {
         this.clazz = this.getClass();
     }
 
     private void log(String message, LogLevel logLevel) {
         System.out.printf("%s %s %s --- [%s] %s : %s\n",
                 CONSOLE_OUTPUT.get("TIME").apply(DateUtil.toDateString(new Date(), "YYYY-MM-DD HH:mm:ss.SSS")),
-                partial(LEVEL_COLOR.get(logLevel), LEVEL_TEXT.get(logLevel)),
+                stain(LEVEL_COLOR.get(logLevel), LEVEL_TEXT.get(logLevel)),
                 CONSOLE_OUTPUT.get("PID").apply(getProgressID()),
                 CONSOLE_OUTPUT.get("THREAD").apply(formatThreadName(Thread.currentThread().getName())),
                 CONSOLE_OUTPUT.get("CLASS").apply(formatClassName(clazz.getName())),

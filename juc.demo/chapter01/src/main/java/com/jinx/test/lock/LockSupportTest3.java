@@ -1,6 +1,6 @@
 package com.jinx.test.lock;
 
-import com.jinx.test.utils.Logger;
+import com.jinx.test.utils.JinxLogger;
 import com.jinx.test.utils.LoggerFactory;
 import com.jinx.test.utils.TestUtil;
 
@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
 public class LockSupportTest3 {
-    private static final Logger log = LoggerFactory.getLogger(LockSupportTest3.class);
+    private static final JinxLogger log = LoggerFactory.getLogger(LockSupportTest3.class);
 
     public static void main(String[] args) {
         System.out.println("\033[030m30m" +
