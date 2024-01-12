@@ -1,35 +1,35 @@
 # NIO 基础（non-blocking IO 非阻塞 IO）
 
-## **三大组件**
+## 三大组件
 
 1. Channel & Buffer
 2. Selector
 
 ---
 
-## **ByteBuffer 结构**
+## ByteBuffer 结构
 
 - capacity
 - position
 - limit
 
-`flip()将position重置，limit置为最后写入位置；`
+`flip() 将 position 重置，limit 置为最后写入位置；`
 
-`clear()重置position和limit；`
+`clear() 重置 position 和 limit；`
 
-`compact()将未读的内容前移，position从剩余部分开始，limit重置`
-
----
-
-## **flip,clear,rewind**
-
-- rewind()方法将 position 置 0，清除 mark，它的作用在于为提取 Buffer 的有效数据做准备。
-- clear()方法将 position 置 0，清除 mark，与 rewind()方法不同的是，它还会将 limit 置为 capacity 的大小，这个方法用于“清空”缓冲区。
-- flip()方法将 position 置 0，清除 mark，然后将 limit 置为 position 的大小，通常在读写转换时使用。
+`compact() 将未读的内容前移，position 从剩余部分开始，limit 重置`
 
 ---
 
-## **什么是粘包、半包**
+## flip,clear,rewind
+
+- rewind() 方法将 position 置 0，清除 mark，它的作用在于为提取 Buffer 的有效数据做准备。
+- clear() 方法将 position 置 0，清除 mark，与 rewind() 方法不同的是，它还会将 limit 置为 capacity 的大小，这个方法用于“清空”缓冲区。
+- flip() 方法将 position 置 0，清除 mark，然后将 limit 置为 position 的大小，通常在读写转换时使用。
+
+---
+
+## 什么是粘包、半包
 
 在实际的网络开发中或者在面试中，最开始使用 TCP 协议时经常会碰上粘包和半包的情况，因此我们有必要了解一下什么是粘包，什么是半包，以及如何去解决。
 
@@ -50,7 +50,7 @@ FileChannel 只能工作在阻塞模式下，不能跟 Selector 一起用。
 
 ---
 
-## **多路复用**
+## 多路复用
 
 单线程可以配合 Selector 完成对多个 Channel 可读写事件的监控，这称之为多路复用。
 

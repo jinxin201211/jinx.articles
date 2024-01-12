@@ -1,8 +1,8 @@
-# $Nginx 转发TCP、WebSocket、SSE配置$
+# Nginx 转发 TCP、WebSocket、SSE 配置
 
-[使用Nginx为TCP/WebSocket协议做反向代理和几个易踩的坑](https://blog.csdn.net/CharlesSimonyi/article/details/90122916)
+[使用 Nginx 为 TCP/WebSocket 协议做反向代理和几个易踩的坑](https://blog.csdn.net/CharlesSimonyi/article/details/90122916)
 
-## 转发TCP
+## 转发 TCP
 
 ``` conf
 stream {
@@ -16,7 +16,7 @@ stream {
 
 ---
 
-## 转发WebSocket
+## 转发 WebSocket
 
 一个是启用`HTTP 1.1`，因为`Nginx`对`HTTP`的反向代理，默认使用`HTTP 1.0`连接到后端，那样没法保持长连接，后端作出`HTTP`响应后，连接就被掐断了，所以启用`HTTP 1.1`以支持长连接。
 
@@ -30,7 +30,7 @@ proxy_http_version 1.1;
 
 ---
 
-## 转发SSE
+## 转发 SSE
 
 ``` conf
 proxy_set_header Upgrade $http_upgrade;

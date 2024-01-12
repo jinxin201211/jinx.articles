@@ -1,4 +1,4 @@
-# $if...else优化$
+# if...else 优化
 
 ## 方法一：提前 return
 
@@ -383,7 +383,7 @@ ActionHandlerFactory.getInstance().doAction("action1");
 ```java
 // 抛出异常
 if (...) {
-  throw new RuntimeException("哎呀，有异常哦...")
+  throw new RuntimeException("哎呀，有异常哦。..")
 }
 
 // if...else 分支
@@ -437,7 +437,7 @@ public class ValidateUtils {
 - 使用
 
 ```java
-ValidateUtils.isTrue(flag).throwMessage("哎呀，有异常哦...");
+ValidateUtils.isTrue(flag).throwMessage("哎呀，有异常哦。..");
 ```
 
 使用方式是不是非常简单？

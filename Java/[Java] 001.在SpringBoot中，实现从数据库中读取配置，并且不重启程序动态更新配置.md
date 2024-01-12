@@ -1,12 +1,12 @@
-# $在 SpringBoot 中，实现从数据库中读取配置，并且不重启程序动态更新配置$
+# 在 SpringBoot 中，实现从数据库中读取配置，并且不重启程序动态更新配置
 
 [在 Spring-boot 中，为@Value 注解添加从数据库读取 properties 支持](https://www.shuzhiduo.com/A/l1dypylA5e/)
 
-## 1.问题背景
+## 1. 问题背景
 
 程序中原本是使用 nacos 作为配置中心，是可以动态更新配置的。但是由于某些原因，在程序运行时，我们并不能操作 nacos，也不能修改配置文件重新启动程序，所以就要自己实现这个功能。
 
-## 2.解决方案
+## 2. 解决方案
 
 因为不能改 nacos，也不能改配置文件，所以就将程序运行种可能会修改的配置放到数据库中。一种方法是在使用的地方全部改成从数据库去取值，但是这样每次都要读数据库，实际的值并不是每次都会变。改进一下就是程序启动时一次将数据库中的所有配置读取出来放进一个全局对象中，使用这个全局对象，配置修改后更新这个全局对象，但是这样代码修改还是比较大，因为之前是用@Value 注解来读取配置。所以需要寻找一种将数据库中的属性解析到@Value 的方式。
 
@@ -91,7 +91,7 @@ public class SysReloadConfigController {
 
     @PostMapping("/reload")
     public HttpResult reloadConfig() throws Exception {
-        reloadConfig();//LoadFromDatabasePropertyConfig.initializeDatabasePropertySourceUsage单独抽出的公共方法
+        reloadConfig();//LoadFromDatabasePropertyConfig.initializeDatabasePropertySourceUsage 单独抽出的公共方法
         scope.refreshAll();
         return HttpResult.success("刷新成功");
     }

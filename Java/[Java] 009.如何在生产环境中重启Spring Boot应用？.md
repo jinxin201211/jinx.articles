@@ -1,22 +1,22 @@
-# $如何在生产环境中重启Spring Boot应用？$
+# 如何在生产环境中重启 Spring Boot 应用？
 
-转载自 [如何在生产环境中重启Spring Boot应用？](https://segmentfault.com/a/1190000018858017)
+转载自 [如何在生产环境中重启 Spring Boot 应用？](https://segmentfault.com/a/1190000018858017)
 
-## 通过HTTP重启Spring Boot应用程序
+## 通过 HTTP 重启 Spring Boot 应用程序
 
 ### 需求背景
 
-在一个很奇葩的需求下，要求在客户端动态修改Spring Boot配置文件中的属性，例如端口号、应用名称、数据库连接信息等，然后通过一个Http请求重启Spring Boot程序。这个需求类似于操作系统更新配置后需要进行重启系统才能生效的应用场景。
+在一个很奇葩的需求下，要求在客户端动态修改 Spring Boot 配置文件中的属性，例如端口号、应用名称、数据库连接信息等，然后通过一个 Http 请求重启 Spring Boot 程序。这个需求类似于操作系统更新配置后需要进行重启系统才能生效的应用场景。
 
-动态配置系统并更新生效是应用的一种通用性需求，实现的方式也有很多种。例如监听配置文件变化、使用配置中心等等。网络上也有很多类似的教程存在，但大多数都是在开发阶段，借助Spring Boot DevTools插件实现应用程序的重启，或者是使用spring-boot-starter-actuator和spring-cloud-starter-config来提供端点（Endpoint）的刷新。
+动态配置系统并更新生效是应用的一种通用性需求，实现的方式也有很多种。例如监听配置文件变化、使用配置中心等等。网络上也有很多类似的教程存在，但大多数都是在开发阶段，借助 Spring Boot DevTools 插件实现应用程序的重启，或者是使用 spring-boot-starter-actuator 和 spring-cloud-starter-config 来提供端点（Endpoint）的刷新。
 
-> 第一种方式无法在生产环境中使用（不考虑），第二种方式需要引入Spring Cloud相关内容，这无疑是杀鸡用了宰牛刀。
+> 第一种方式无法在生产环境中使用（不考虑），第二种方式需要引入 Spring Cloud 相关内容，这无疑是杀鸡用了宰牛刀。
 
-接下来，我将尝试采用另外一种方式实现HTTP请求重启Spring Boot应用程序这个怪异的需求。
+接下来，我将尝试采用另外一种方式实现 HTTP 请求重启 Spring Boot 应用程序这个怪异的需求。
 
 ### 尝试思路
 
-重启Spring Boot应用程序的关键步骤是对主类中`SpringApplication.run(Application.class,args);`方法返回值的处理。`SpringApplication#run()`方法将会返回一个`ConfigurableApplicationContext`类型对象，通过查看官方文档可以看到，`ConfigurableApplicationContext`接口类中定义了一个`close()`方法，可以用来关闭当前应用的上下文：
+重启 Spring Boot 应用程序的关键步骤是对主类中`SpringApplication.run(Application.class,args);`方法返回值的处理。`SpringApplication#run()`方法将会返回一个`ConfigurableApplicationContext`类型对象，通过查看官方文档可以看到，`ConfigurableApplicationContext`接口类中定义了一个`close()`方法，可以用来关闭当前应用的上下文：
 
 ```java
 package org.springframework.context;
@@ -78,9 +78,9 @@ public interface ConfigurableApplicationContext extends ApplicationContext, Life
     }
 ```
 
-在`#doClose()`方法中，首先将应用上下文从注册表中清除掉，然后是销毁Bean工厂中的Beans,紧接着关闭Bean工厂。
+在`#doClose()`方法中，首先将应用上下文从注册表中清除掉，然后是销毁 Bean 工厂中的 Beans, 紧接着关闭 Bean 工厂。
 
-官方文档看到这里，就产生了解决一个结局重启应用应用程序的大胆猜想。在应用程序的`main()`方法中，我们可以使用一个临时变量来存放`SpringApplication.run()`返回的`ConfigurableApplicationContext`对象，当我们完成对Spring Boot应用程序中属性的设置后，调用`ConfigurableApplicationContext`的`#close()`方法，最后再调用`SpringApplication.run()`方法重新给`ConfigurableApplicationContext`对象进行赋值已达到重启的效果。
+官方文档看到这里，就产生了解决一个结局重启应用应用程序的大胆猜想。在应用程序的`main()`方法中，我们可以使用一个临时变量来存放`SpringApplication.run()`返回的`ConfigurableApplicationContext`对象，当我们完成对 Spring Boot 应用程序中属性的设置后，调用`ConfigurableApplicationContext`的`#close()`方法，最后再调用`SpringApplication.run()`方法重新给`ConfigurableApplicationContext`对象进行赋值已达到重启的效果。
 
 现在，我们再来看一下`SpringApplication.run()`方法中是如何重新创建`ConfigurableApplicationContext`对象的。在`SpringApplication`类中，`run()`方法会调用`createApplicationContext()`方法来创建一个`ApplicationContext`对象：
 
@@ -110,7 +110,7 @@ public interface ConfigurableApplicationContext extends ApplicationContext, Life
 
 `createApplicationContext()`方法会根据`WebApplicationType`类型来创建`ApplicationContext`对象。在`WebApplicationType`中定义了三种种类型：`NONE`、`SERVLET`和`REACTIVE`。通常情况下，将会创建`servlet`类型的`ApplicationContext`对象。
 
-接下来，我将以一个简单的Spring Boot工程来验证上述的猜想是否能够达到重启Spring Boot应用程序的需求。
+接下来，我将以一个简单的 Spring Boot 工程来验证上述的猜想是否能够达到重启 Spring Boot 应用程序的需求。
 
 ### 编码实现
 
@@ -120,7 +120,7 @@ public interface ConfigurableApplicationContext extends ApplicationContext, Life
 spring.application.name=SPRING-BOOT-APPLICATION
 ```
 
-接下来，在Spring Boot主类中定义两个私有变量，用于存放main()方法的参数和SpringApplication.run()方法返回的值。下面的代码给出了主类的示例：
+接下来，在 Spring Boot 主类中定义两个私有变量，用于存放 main() 方法的参数和 SpringApplication.run() 方法返回的值。下面的代码给出了主类的示例：
 
 ```java
 public class ExampleRestartApplication {
@@ -140,7 +140,7 @@ public class ExampleRestartApplication {
 }
 ```
 
-最后，直接在主类中定义用于刷新并重启Spring Boot应用程序的端点(Endpoint)，并使用`@RestController`注解对主类进行注释。
+最后，直接在主类中定义用于刷新并重启 Spring Boot 应用程序的端点 (Endpoint)，并使用`@RestController`注解对主类进行注释。
 
 ```java
   @GetMapping("/refresh")
@@ -162,9 +162,9 @@ public class ExampleRestartApplication {
   }
 ```
 
->说明：为了能够重新启动Spring Boot应用程序，需要将close()和run()方法放在一个独立的线程中执行。
+>说明：为了能够重新启动 Spring Boot 应用程序，需要将 close() 和 run() 方法放在一个独立的线程中执行。
 
-为了验证Spring Boot应用程序在被修改重启有相关的属性有没有生效，再添加一个获取属性信息的端点，返回配置属性的信息。
+为了验证 Spring Boot 应用程序在被修改重启有相关的属性有没有生效，再添加一个获取属性信息的端点，返回配置属性的信息。
 
 ```java
   @GetMapping("/info")
@@ -239,7 +239,7 @@ public class ExampleRestartApplication {
 }
 ```
 
-接下来，运行Spring Boot程序，下面是应用程序启动成功后控制台输出的日志信息：
+接下来，运行 Spring Boot 程序，下面是应用程序启动成功后控制台输出的日志信息：
 
 ```log
 [2019-03-12T19:05:53.053z][org.springframework.scheduling.concurrent.ExecutorConfigurationSupport][main][171][INFO ] Initializing ExecutorService 'applicationTaskExecutor'
@@ -248,7 +248,7 @@ public class ExampleRestartApplication {
 [2019-03-12T19:05:53.053z][org.springframework.boot.StartupInfoLogger][main][59][INFO ] Started ExampleRestartApplication in 1.587 seconds (JVM running for 2.058)
 ```
 
-在测试修改系统配置并重启之前，使用Postman测试工具访问：<http://localhost:8080/info> ，查看一下返回的信息：
+在测试修改系统配置并重启之前，使用 Postman 测试工具访问：<http://localhost:8080/info> ，查看一下返回的信息：
 
 ![001](/imgs/java009/001.png)
 
@@ -258,7 +258,7 @@ public class ExampleRestartApplication {
 
 ![002](/imgs/java009/002.png)
 
-可以看到，Spring Boot应用程序已经重新启动成功，最后，在此访问：<http://localhost:8080/info> ,验证之前的修改是否生效：
+可以看到，Spring Boot 应用程序已经重新启动成功，最后，在此访问：<http://localhost:8080/info> , 验证之前的修改是否生效：
 
 ![003](/imgs/java009/003.png)
 
@@ -268,8 +268,8 @@ public class ExampleRestartApplication {
 
 配置文件的属性也被成功的修改，证明之前的猜想验证成功了。
 
->本次内容所描述的方法不适用于以JAR文件启动的Spring Boot应用程序，以WAR包的方式启动应用程序亲测可用。┏ (^ω^)=☞目前该药方副作用未知，如有大牛路过，还望留步指点迷津，不胜感激。
+>本次内容所描述的方法不适用于以 JAR 文件启动的 Spring Boot 应用程序，以 WAR 包的方式启动应用程序亲测可用。┏ (^ω^)=☞目前该药方副作用未知，如有大牛路过，还望留步指点迷津，不胜感激。
 
 ### 结束语
 
-本次内容记录了自己验证HTTP请求重启Spring Boot应用程序试验的一次经历，文章中所涉及到的内容仅代表个人的一些观点和不成熟的想法，并未将此方法应用到实际的项目中去，如因引用本次内容中的方法应用到实际生产开发工作中所带来的风险，需引用者自行承担因风险带来的后遗症(๑￫ܫ￩)——此药方还有待商榷(O_o)(o_O)。
+本次内容记录了自己验证 HTTP 请求重启 Spring Boot 应用程序试验的一次经历，文章中所涉及到的内容仅代表个人的一些观点和不成熟的想法，并未将此方法应用到实际的项目中去，如因引用本次内容中的方法应用到实际生产开发工作中所带来的风险，需引用者自行承担因风险带来的后遗症 (๑￫ܫ￩)——此药方还有待商榷 (O_o)(o_O)。

@@ -1,4 +1,4 @@
-# $使用 javassist 动态创建 Java 类$
+# 使用 javassist 动态创建 Java 类
 
 需求背景：我们有一些数据需要第三方提供，第三方是通过 WebService 的方式通知我们可以拉取数据，WebService 服务确定了请求和返回的格式，只能通过 WebService 方法名来区分应该拉取哪张表，并且数据库表可能会有变化，所以需要 WebService 和数据库表名做成可配置的。
 
@@ -13,9 +13,9 @@ public class DynamicWebserviceGenerator {
         ClassPool pool = ClassPool.getDefault();
 
         // 创建类
-        CtClass cc = pool.makeClass("com.sgcc.md.gxh.yxws.service." + serviceName + (incr++)); //让每次重新注册webservice时生成的类名不一样
+        CtClass cc = pool.makeClass("com.sgcc.md.gxh.yxws.service." + serviceName + (incr++)); //让每次重新注册 webservice 时生成的类名不一样
 
-        // 继承ServiceMould的doClient方法
+        // 继承 ServiceMould 的 doClient 方法
 //        CtClass ccParent = pool.get("classpath:com.sgcc.md.gxh.yxws.service.ServiceMould");
         pool.insertClassPath(new ClassClassPath(ServiceMould.class));
         CtClass ccParent = pool.get(ServiceMould.class.getName());
@@ -36,12 +36,12 @@ public class DynamicWebserviceGenerator {
         // 创建方法
         CtClass ccStringType = pool.get("java.lang.String");
         for (WebServiceInfo methodInfo : serviceMethods) {
-            // 参数：  1：返回类型  2：方法名称  3：传入参数类型  4：所属类CtClass
+            // 参数：  1：返回类型  2：方法名称  3：传入参数类型  4：所属类 CtClass
             CtMethod ctMethod = new CtMethod(ccStringType, methodInfo.getMethodname(), new CtClass[]{ccStringType}, cc);
             ctMethod.setModifiers(Modifier.PUBLIC);
             StringBuilder body = new StringBuilder();
             body.append("{\n");
-            // $1代表方法的参数
+            // $1 代表方法的参数
             body.append("    return doService($1, \"" + methodInfo.getTablename() + "\", " + (methodInfo.getIsdelaysyncs() == null ? 0 : methodInfo.getIsdelaysyncs()) + ", \"" + methodInfo.getServicename() + "\", \"" + methodInfo.getMethodname() + "\");");
             body.append("\n}");
             ctMethod.setBody(body.toString());
@@ -83,7 +83,7 @@ public class ServiceMould {
     @Resource
     WebServiceLogService webServiceLogService;
 
-    // public方法会被cxf发布出去
+    // public 方法会被 cxf 发布出去
     protected String doService(String data, String tableName, int isDelaySync, String serviceName, String methodName) {
         // SyncDataInfo syncDataInfo = new SyncDataInfo(data,tableName,isDelaySync);
         syncDataInfo.setDefultInfo();

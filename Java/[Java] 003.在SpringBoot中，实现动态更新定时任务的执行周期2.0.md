@@ -1,9 +1,9 @@
-# $在 SpringBoot 中，实现动态更新定时任务的执行周期 2.0$
+# 在 SpringBoot 中，实现动态更新定时任务的执行周期 2.0
 
 因为相同的原因，nacos 不能时时修改，所以需要把定时任务的配置移到数据库中。
 定时任务改用 Quartz，比较方便管理，所以实现起来就比较简单，只要在修改配置后重新加载定时任务就行。
 
-Quartz 任务管理工具类:
+Quartz 任务管理工具类：
 
 ```java
 @Component
@@ -20,14 +20,14 @@ public class QuartzManager {
     public void addJob(SysTaskSchedule task) {
         try {
             Class taskClass = Class.forName(task.getClassName());
-            // 任务名称和组构成任务key
+            // 任务名称和组构成任务 key
             JobDetail jobDetail = JobBuilder
                     .newJob(taskClass)
                     .withIdentity(task.getTaskName(), task.getTaskName())
                     .build();
             jobDetail.getJobDataMap().put("task_schedule", task);
 
-            Trigger trigger = TriggerBuilder.newTrigger().withIdentity(task.getTaskName(), task.getTaskName())// 触发器key
+            Trigger trigger = TriggerBuilder.newTrigger().withIdentity(task.getTaskName(), task.getTaskName())// 触发器 key
                     .startAt(DateBuilder.futureDate(1, DateBuilder.IntervalUnit.SECOND))
                     .withSchedule(CronScheduleBuilder.cronSchedule(task.getCronExpression())).startNow().build();
 
@@ -90,7 +90,7 @@ public class QuartzManager {
     }
 
     /**
-     * 更新任务的cron表达式
+     * 更新任务的 cron 表达式
      *
      * @param task
      * @throws SchedulerException
@@ -130,15 +130,15 @@ public class SysTaskSchedule implements Serializable {
     private String taskName;
 
     /**
-     * cron表达式
+     * cron 表达式
      */
-    @ApiModelProperty(value = "cron表达式")
+    @ApiModelProperty(value = "cron 表达式")
     private String cronExpression;
 
     /**
-     * 任务状态，0暂停，1启用
+     * 任务状态，0 暂停，1 启用
      */
-    @ApiModelProperty(value = "任务状态，0暂停，1启用")
+    @ApiModelProperty(value = "任务状态，0 暂停，1 启用")
     private Integer taskStatus;
 
     /**

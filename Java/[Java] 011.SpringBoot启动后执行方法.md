@@ -1,6 +1,6 @@
-# $SpringBoot启动后执行方法$
+# SpringBoot 启动后执行方法
 
-转载自 [Springboot启动后执行方法（4种）](https://www.cnblogs.com/lizm166/p/16542073.html)
+转载自 [Springboot 启动后执行方法（4 种）](https://www.cnblogs.com/lizm166/p/16542073.html)
 
 ## 一、注解@PostConstruct
 
@@ -9,7 +9,7 @@
 ```java
 @Component
 public class StartInit {
-//    @Autowired   可以注入bean
+//    @Autowired   可以注入 bean
 //    ISysUserService userService;
 
     @PostConstruct
@@ -20,11 +20,11 @@ public class StartInit {
 }
 ```
 
-## 二、CommandLineRunner接口
+## 二、CommandLineRunner 接口
 
-实现 `CommandLineRunner` 接口 然后在run方法里面调用需要调用的方法即可，好处是方法执行时，项目已经初始化完毕，是可以正常提供服务的。
+实现 `CommandLineRunner` 接口 然后在 run 方法里面调用需要调用的方法即可，好处是方法执行时，项目已经初始化完毕，是可以正常提供服务的。
 
-同时该方法也可以接受参数，可以根据项目启动时: `java -jar demo.jar arg1 arg2 arg3` 传入的参数进行一些处理。
+同时该方法也可以接受参数，可以根据项目启动时：`java -jar demo.jar arg1 arg2 arg3` 传入的参数进行一些处理。
 
 ```java
 @Component
@@ -36,7 +36,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
 }
 ```
 
-## 三、实现ApplicationRunner接口
+## 三、实现 ApplicationRunner 接口
 
 实现 `ApplicationRunner` 接口和实现 `CommandLineRunner` 接口基本是一样的。
 
@@ -56,9 +56,9 @@ public class ApplicationRunnerImpl implements ApplicationRunner {
 }
 ```
 
-## 四、实现ApplicationListener
+## 四、实现 ApplicationListener
 
-实现接口 `ApplicationListener` 方式和实现 `ApplicationRunner` ， `CommandLineRunner` 接口都不影响服务，都可以正常提供服务，注意监听的事件，通常是 `ApplicationStartedEvent` 或者 `ApplicationReadyEvent` ，其他的事件可能无法注入bean。
+实现接口 `ApplicationListener` 方式和实现 `ApplicationRunner` ， `CommandLineRunner` 接口都不影响服务，都可以正常提供服务，注意监听的事件，通常是 `ApplicationStartedEvent` 或者 `ApplicationReadyEvent` ，其他的事件可能无法注入 bean。
 
 ```java
 @Component
@@ -72,7 +72,7 @@ public class ApplicationListenerImpl implements ApplicationListener<ApplicationS
 
 ## 五、四种方式的执行顺序
 
-注解方式 `@PostConstruct` 始终最先执行，此时Spring还没有启动完成。
+注解方式 `@PostConstruct` 始终最先执行，此时 Spring 还没有启动完成。
 
 如果监听的是 `ApplicationStartedEvent` 事件，则一定会在 `CommandLineRunner` 和 `ApplicationRunner` 之前执行。
 

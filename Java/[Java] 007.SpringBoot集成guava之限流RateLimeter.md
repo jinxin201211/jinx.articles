@@ -1,12 +1,12 @@
-# $SpringBoot集成guava之限流RateLimeter$
+# SpringBoot 集成 guava 之限流 RateLimeter
 
 ## 1. 前言
 
-Guava工程包含了若干被Google的 Java项目广泛依赖 的核心库，例如：集合 [collections] 、缓存 [caching] 、原生类型支持 [primitives support] 、并发库 [concurrency libraries] 、通用注解 [common annotations] 、字符串处理 [string processing] 、I/O 等等。
+Guava 工程包含了若干被 Google 的 Java 项目广泛依赖 的核心库，例如：集合 [collections] 、缓存 [caching] 、原生类型支持 [primitives support] 、并发库 [concurrency libraries] 、通用注解 [common annotations] 、字符串处理 [string processing] 、I/O 等等。
 
-## 2. springBoot集成rateLimeter实现单机限流
+## 2. springBoot 集成 rateLimeter 实现单机限流
 
-### 2.1. 引入guava依赖
+### 2.1. 引入 guava 依赖
 
 ``` xml
 <dependency>
@@ -75,7 +75,7 @@ public class GuavaRateLimiterAspect {
                 RATE_LIMITER_CACHE.put(method.getName(), RateLimiter.create(qps));
             }
             String methodName = method.getDeclaringClass().getCanonicalName() + "." + method.getName();
-            log.debug("【{}】的QPS设置为: {}", methodName, RATE_LIMITER_CACHE.get(method.getName()).getRate());
+            log.debug("【{}】的 QPS 设置为：{}", methodName, RATE_LIMITER_CACHE.get(method.getName()).getRate());
             // 尝试获取令牌
             if (RATE_LIMITER_CACHE.get(method.getName()) != null && !RATE_LIMITER_CACHE.get(method.getName()).tryAcquire(guawaRateLimiter.timeout(), guawaRateLimiter.timeUnit())) {
                 log.warn("【{}】被限流啦", methodName);
@@ -87,7 +87,7 @@ public class GuavaRateLimiterAspect {
 }
 ```
 
-### 2.4. 定义Controller进行测试
+### 2.4. 定义 Controller 进行测试
 
 ```java
 @RestController

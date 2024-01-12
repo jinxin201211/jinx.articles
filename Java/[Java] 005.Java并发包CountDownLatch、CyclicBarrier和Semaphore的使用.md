@@ -1,4 +1,4 @@
-# $Java 并发包 CountDownLatch、CyclicBarrier 和 Semaphore 的使用$
+# Java 并发包 CountDownLatch、CyclicBarrier 和 Semaphore 的使用
 
 [Java 并发包 CountDownLatch、CyclicBarrier、Semaphore 原理解析](https://baijiahao.baidu.com/s?id=1667358787034051395&wfr=spider&for=pc)
 
@@ -29,7 +29,6 @@
                 }).start();
             }
         }).start();
-
 
         new Thread(() -> {
             try {

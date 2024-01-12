@@ -1,4 +1,4 @@
-# $在 SpringBoot 中，实现动态更新定时任务的执行周期$
+# 在 SpringBoot 中，实现动态更新定时任务的执行周期
 
 [解决 @RefreshScope 导致定时任务注解 @Scheduled 失效](https://blog.csdn.net/u012410733/article/details/125985361)
 
@@ -9,7 +9,7 @@
 public class TaskSchedule {
     @Scheduled(cron = "${scheduled.testTask}")
     public void testTask() {
-        System.out.println("从配置中读取cron表达式");
+        System.out.println("从配置中读取 cron 表达式");
     }
 }
 ```
@@ -24,7 +24,7 @@ public class TaskSchedule {
 public class TaskSchedule implements ApplicationListener<RefreshScopeRefreshedEvent> {
     @Scheduled(cron = "${scheduled.testTask}")
     public void testTask() {
-        System.out.println("从配置中读取cron表达式");
+        System.out.println("从配置中读取 cron 表达式");
     }
 
     @Override
