@@ -16,7 +16,8 @@ public class AtomicFieldUpdaterTest {
             new Thread(() -> {
                 for (int j = 0; j < 1000; j++) {
 //                    bankAcocunt.add();
-                    bankAcocunt.transferAccount(bankAcocunt);
+//                    bankAcocunt.transferAccount(bankAcocunt);
+                    bankAcocunt.transferAccount();
                 }
                 count.countDown();
             }, "Thread" + i).start();
@@ -45,5 +46,9 @@ class BankAcocunt {
 
     public void transferAccount(BankAcocunt bankAcocunt) {
         fieldUpdater.getAndIncrement(bankAcocunt);
+    }
+
+    public void transferAccount() {
+        fieldUpdater.getAndIncrement(this);
     }
 }
