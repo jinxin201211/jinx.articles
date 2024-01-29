@@ -11,11 +11,18 @@ import java.util.concurrent.atomic.LongAdder;
 public class LikeCountTest {
     private final static JinxLogger log = LoggerFactory.getLogger(LikeCountTest.class);
 
-    private static int THREAD_COUNT = 50;
+    private static final int THREAD_COUNT = 50;
 
-    private static int LIKE_COUNT = 1000000;
+    private static final int LIKE_COUNT = 1000000;
 
     public static void main(String[] args) throws InterruptedException {
+        likeSynchronized();
+        likeAtomic();
+        likeAdder();
+        likeAccumulator();
+    }
+
+    private static void likeSynchronized() throws InterruptedException {
         LikeCount likeCount = new LikeCount();
         CountDownLatch latch1 = new CountDownLatch(THREAD_COUNT);
         long startTime = System.currentTimeMillis();
@@ -30,10 +37,12 @@ public class LikeCountTest {
         latch1.await();
         long finishTime = System.currentTimeMillis();
         log.info("第一种方法：" + (finishTime - startTime) + "，结果：" + likeCount.count);
+    }
 
-
+    private static void likeAtomic() throws InterruptedException {
+        LikeCount likeCount = new LikeCount();
         CountDownLatch latch2 = new CountDownLatch(THREAD_COUNT);
-        startTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
         for (int i = 0; i < THREAD_COUNT; i++) {
             new Thread(() -> {
                 for (int j = 0; j < LIKE_COUNT; j++) {
@@ -43,12 +52,14 @@ public class LikeCountTest {
             }, "thread" + (i + 1)).start();
         }
         latch2.await();
-        finishTime = System.currentTimeMillis();
-        log.info("第二种方法：" + (finishTime - startTime) + "，结果：" + likeCount.count);
+        long finishTime = System.currentTimeMillis();
+        log.info("第二种方法：" + (finishTime - startTime) + "，结果：" + likeCount.aCount.get());
+    }
 
-
-        CountDownLatch latch3= new CountDownLatch(THREAD_COUNT);
-        startTime = System.currentTimeMillis();
+    private static void likeAdder() throws InterruptedException {
+        LikeCount likeCount = new LikeCount();
+        CountDownLatch latch3 = new CountDownLatch(THREAD_COUNT);
+        long startTime = System.currentTimeMillis();
         for (int i = 0; i < THREAD_COUNT; i++) {
             new Thread(() -> {
                 for (int j = 0; j < LIKE_COUNT; j++) {
@@ -58,12 +69,14 @@ public class LikeCountTest {
             }, "thread" + (i + 1)).start();
         }
         latch3.await();
-        finishTime = System.currentTimeMillis();
-        log.info("第三种方法：" + (finishTime - startTime));
+        long finishTime = System.currentTimeMillis();
+        log.info("第三种方法：" + (finishTime - startTime) + "，结果：" + likeCount.lCount.longValue());
+    }
 
-
-        CountDownLatch latch4= new CountDownLatch(THREAD_COUNT);
-        startTime = System.currentTimeMillis();
+    private static void likeAccumulator() throws InterruptedException {
+        LikeCount likeCount = new LikeCount();
+        CountDownLatch latch4 = new CountDownLatch(THREAD_COUNT);
+        long startTime = System.currentTimeMillis();
         for (int i = 0; i < THREAD_COUNT; i++) {
             new Thread(() -> {
                 for (int j = 0; j < LIKE_COUNT; j++) {
@@ -73,8 +86,8 @@ public class LikeCountTest {
             }, "thread" + (i + 1)).start();
         }
         latch4.await();
-        finishTime = System.currentTimeMillis();
-        log.info("第四种方法：" + (finishTime - startTime));
+        long finishTime = System.currentTimeMillis();
+        log.info("第四种方法：" + (finishTime - startTime) + "，结果：" + likeCount.laCount.longValue());
     }
 }
 
@@ -100,6 +113,6 @@ class LikeCount {
     LongAccumulator laCount = new LongAccumulator((x, y) -> x + y, 0l);
 
     public void likeAccumulator() {
-        lCount.increment();
+        laCount.accumulate(1);
     }
 }

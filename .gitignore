@@ -9,3 +9,4 @@ jvm.demo/target
 jvm.demo/lib
 kotlin-demo/target
 *.class
+.obsidian
