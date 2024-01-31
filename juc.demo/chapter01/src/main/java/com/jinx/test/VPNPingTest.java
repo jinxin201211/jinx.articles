@@ -20,7 +20,7 @@ public class VPNPingTest {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(8);
         List<CompletableFuture<Boolean>> futures = new ArrayList<>();
-        for (int i = 1; i <= 4; i++) {
+        for (int i = 0; i <= 5; i++) {
             for (int j = 1; j <= 255; j++) {
                 int finalI = i;
                 int finalJ = j;

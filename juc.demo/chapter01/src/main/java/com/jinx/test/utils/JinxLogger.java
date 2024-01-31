@@ -111,16 +111,44 @@ public class JinxLogger {
         log(message, LogLevel.INFO);
     }
 
+    public void info(String format, Object... args) {
+        for (Object arg : args) {
+            format = format.replaceFirst("\\{\\}", String.valueOf(arg));
+        }
+        log(format, LogLevel.INFO);
+    }
+
     public void debug(String message) {
         log(message, LogLevel.DEBUG);
+    }
+
+    public void debug(String format, Object... args) {
+        for (Object arg : args) {
+            format = format.replace("{}", String.valueOf(arg));
+        }
+        log(format, LogLevel.DEBUG);
     }
 
     public void warn(String message) {
         log(message, LogLevel.WARN);
     }
 
+    public void warn(String format, Object... args) {
+        for (Object arg : args) {
+            format = format.replace("{}", String.valueOf(arg));
+        }
+        log(format, LogLevel.WARN);
+    }
+
     public void error(String message) {
         log(message, LogLevel.ERROR);
+    }
+
+    public void error(String format, Object... args) {
+        for (Object arg : args) {
+            format = format.replace("{}", String.valueOf(arg));
+        }
+        log(format, LogLevel.ERROR);
     }
 }
 
