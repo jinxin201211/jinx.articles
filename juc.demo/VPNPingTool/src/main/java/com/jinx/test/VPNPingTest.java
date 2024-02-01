@@ -23,6 +23,7 @@ public class VPNPingTest {
         ExecutorService executorService = Executors.newFixedThreadPool(8);
         List<CompletableFuture<Boolean>> futures = new ArrayList<>();
         List<String> ips = readHistory();
+        Collections.reverse(ips);
         List<String> newIps = new ArrayList<>();
         for (int i = 0; i <= 5; i++) {
             for (int j = 1; j <= 255; j++) {
