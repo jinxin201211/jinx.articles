@@ -1,7 +1,7 @@
 package com.jinx.test.atomic;
 
-import com.jinx.test.utils.JinxLogger;
-import com.jinx.test.utils.LoggerFactory;
+import com.jinx.tool.JinxLogger;
+import com.jinx.tool.LoggerFactory;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicLong;

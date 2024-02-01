@@ -1,7 +1,7 @@
 package com.jinx.test.threadlocal;
 
-import com.jinx.test.utils.JinxLogger;
-import com.jinx.test.utils.LoggerFactory;
+import com.jinx.tool.JinxLogger;
+import com.jinx.tool.LoggerFactory;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

@@ -1,4 +1,4 @@
-package com.jinx.test.utils;
+package com.jinx.tool;
 
 public class LoggerFactory {
     public static JinxLogger getLogger(Class<?> clazz) {

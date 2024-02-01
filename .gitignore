@@ -1,12 +1,9 @@
 netty-demo/src/main/resources/to.txt
-spring-demo/target
-spring-demo/.idea
 *.iml
 rebel.xml
-jvm.demo/out/
 .idea
-jvm.demo/target
-jvm.demo/lib
-kotlin-demo/target
+target
+lib
+out
 *.class
 .obsidian

@@ -1,8 +1,8 @@
 package com.jinx.test.cas;
 
-import com.jinx.test.utils.JinxLogger;
-import com.jinx.test.utils.LoggerFactory;
-import com.jinx.test.utils.TestUtil;
+import com.jinx.tool.JinxLogger;
+import com.jinx.tool.LoggerFactory;
+import com.jinx.tool.TestUtil;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicStampedReference;

@@ -1,4 +1,4 @@
-package com.jinx.test.utils;
+package com.jinx.tool;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
