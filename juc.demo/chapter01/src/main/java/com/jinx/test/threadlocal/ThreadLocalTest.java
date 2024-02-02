@@ -57,7 +57,6 @@ public class ThreadLocalTest {
                 }
             }, "thread-" + i).start();
         }
-
         TestUtil.sleep(300L);
         log.info("计划卖出 {} 套房子", Arrays.stream(threadSize).reduce(0, (prev, next) -> prev + next));
     }
