@@ -23,6 +23,5 @@ public class VolatileVisibilityTest {
 
         flag = false;
         log.info("flag changed to false");
-        ;
     }
 }

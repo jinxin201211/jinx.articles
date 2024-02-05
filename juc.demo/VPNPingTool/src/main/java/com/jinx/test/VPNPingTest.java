@@ -20,7 +20,7 @@ public class VPNPingTest {
     private static volatile boolean found = false;
 
     public static void main(String[] args) {
-        ExecutorService executorService = Executors.newFixedThreadPool(8);
+        ExecutorService executorService = Executors.newFixedThreadPool(24);
         List<CompletableFuture<Boolean>> futures = new ArrayList<>();
         List<String> ips = readHistory();
         Collections.reverse(ips);
@@ -71,7 +71,7 @@ public class VPNPingTest {
             socket.close();
             return true;
         } catch (Exception e) {
-            log.error(ip + " 连接失败...");
+            log.warn(ip + " 连接失败...");
             return false;
         }
     }
