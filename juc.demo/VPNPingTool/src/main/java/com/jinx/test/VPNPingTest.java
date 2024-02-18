@@ -19,13 +19,19 @@ public class VPNPingTest {
 
     private static volatile boolean found = false;
 
+    private static volatile int CONCURRENT_NUMBER = 24;
+
+    private static volatile short MIN_HOST = 0;
+
+    private static volatile short MAX_HOST = 5;
+
     public static void main(String[] args) {
-        ExecutorService executorService = Executors.newFixedThreadPool(24);
+        ExecutorService executorService = Executors.newFixedThreadPool(CONCURRENT_NUMBER);
         List<CompletableFuture<Boolean>> futures = new ArrayList<>();
         List<String> ips = readHistory();
         Collections.reverse(ips);
         List<String> newIps = new ArrayList<>();
-        for (int i = 0; i <= 5; i++) {
+        for (int i = MIN_HOST; i <= MAX_HOST; i++) {
             for (int j = 1; j <= 255; j++) {
                 String ip = "11.16." + i + "." + j;
                 if (!ips.contains(ip)) {
