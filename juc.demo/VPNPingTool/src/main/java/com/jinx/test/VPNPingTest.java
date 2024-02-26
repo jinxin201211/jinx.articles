@@ -53,6 +53,8 @@ public class VPNPingTest {
 
         ExecutorService checkFoundThread = Executors.newSingleThreadExecutor();
         checkFoundThread.execute(() -> {
+            //先让此线程暂停1秒，防止第一个就连接成功，导致后续判断不到
+            TestUtil.sleep(1000L);
             while (!found) {
                 TestUtil.sleep(1000L);
             }
