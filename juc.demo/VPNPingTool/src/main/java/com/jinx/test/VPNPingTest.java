@@ -19,11 +19,11 @@ public class VPNPingTest {
 
     private static volatile boolean found = false;
 
-    private static volatile int CONCURRENT_NUMBER = 24;
+    private static final int CONCURRENT_NUMBER = 24;
 
-    private static volatile short MIN_HOST = 0;
+    private static final short MIN_HOST = 0;
 
-    private static volatile short MAX_HOST = 5;
+    private static final short MAX_HOST = 5;
 
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(CONCURRENT_NUMBER);
