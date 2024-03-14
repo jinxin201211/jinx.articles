@@ -2,7 +2,6 @@ package com.jinx.test;
 
 import com.jinx.tool.JinxLogger;
 import com.jinx.tool.LoggerFactory;
-import com.jinx.tool.TestUtil;
 
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -27,7 +26,6 @@ public class VPNPingTest {
 
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(CONCURRENT_NUMBER);
-        List<CompletableFuture<Boolean>> futures = new ArrayList<>();
         List<String> ips = readHistory();
         Collections.reverse(ips);
         List<String> newIps = new ArrayList<>();
@@ -42,31 +40,17 @@ public class VPNPingTest {
         Collections.shuffle(newIps);
         ips.addAll(newIps);
         for (String ip : ips) {
-            futures.add(CompletableFuture.supplyAsync(() -> {
-                found = ping(ip);
-                if (found) {
-                    writeHistory(ip);
+            CompletableFuture.supplyAsync(() -> {
+                if (!found) {
+                    found = ping(ip);
+                    if (found) {
+                        log.info("找到了...");
+                        writeHistory(ip);
+                    }
                 }
                 return found;
-            }, executorService));
+            }, executorService);
         }
-
-        ExecutorService checkFoundThread = Executors.newSingleThreadExecutor();
-        checkFoundThread.execute(() -> {
-            //先让此线程暂停1秒，防止第一个就连接成功，导致后续判断不到
-            TestUtil.sleep(1000L);
-            while (!found) {
-                TestUtil.sleep(1000L);
-            }
-            log.info("找到了，正在停止其他线程...");
-            for (CompletableFuture<Boolean> future2 : futures) {
-                if (future2 != null && !future2.isDone()) {
-                    future2.cancel(true);
-                }
-            }
-            log.info("找到了，已停止其他线程...");
-        });
-        checkFoundThread.shutdown();
         executorService.shutdown();
     }
 
