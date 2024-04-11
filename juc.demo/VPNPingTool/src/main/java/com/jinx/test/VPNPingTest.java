@@ -12,13 +12,15 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class VPNPingTest {
     private final static JinxLogger log = LoggerFactory.getLogger(VPNPingTest.class);
 
-    private static volatile boolean found = false;
+    private static final AtomicBoolean found = new AtomicBoolean(false);
 
-    private static final int CONCURRENT_NUMBER = 24;
+    private static final int CONCURRENT_NUMBER = 10;
 
     private static final short MIN_HOST = 0;
 
@@ -41,9 +43,10 @@ public class VPNPingTest {
         ips.addAll(newIps);
         for (String ip : ips) {
             CompletableFuture.supplyAsync(() -> {
-                if (!found) {
-                    found = ping(ip);
-                    if (found) {
+                if (!found.get()) {
+                    boolean isFound = ping(ip);
+                    if (isFound) {
+                        found.set(true);
                         log.info("找到了...");
                         writeHistory(ip);
                     }
@@ -52,6 +55,15 @@ public class VPNPingTest {
             }, executorService);
         }
         executorService.shutdown();
+
+        try {
+            if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) { // 等待一段时间确保任务完成
+                executorService.shutdownNow(); // 强制关闭
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // 恢复中断状态
+            executorService.shutdownNow(); // 强制关闭
+        }
     }
 
     private static boolean ping(String ip) {
