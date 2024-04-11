@@ -32,7 +32,7 @@ public class VPNPingTest {
         for (int i = MIN_HOST; i <= MAX_HOST; i++) {
             for (int j = 1; j <= 255; j++) {
                 String ip = "11.16." + i + "." + j;
-                if (!ips.contains(ip)) {
+                if (!ips.contains(ip) && !"11.16.1.218".equals(ip)) {
                     newIps.add(ip);
                 }
             }
