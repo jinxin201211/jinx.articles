@@ -2,7 +2,11 @@ package com.jinx.test.aqs;
 
 import com.jinx.tool.TestUtil;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class AqsTest1 {
     public static void main(String[] args) {
@@ -25,5 +29,9 @@ public class AqsTest1 {
                 reentrantLock.unlock();
             }
         }).start();
+        CyclicBarrier barrier = new CyclicBarrier(1);
+        CountDownLatch latch = new CountDownLatch(1);
+        Semaphore semaphore = new Semaphore(1);
+        ReentrantReadWriteLock readWriteLock = new ReentrantReadWriteLock();
     }
 }
