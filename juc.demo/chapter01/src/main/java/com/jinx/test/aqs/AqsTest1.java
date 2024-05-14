@@ -10,23 +10,41 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class AqsTest1 {
     public static void main(String[] args) {
-        ReentrantLock reentrantLock = new ReentrantLock();
+        ReentrantLock reentrantLock = new ReentrantLock(true);
         new Thread(() -> {
-            reentrantLock.lock();
-            try {
-                System.out.println("hello");
-                TestUtil.sleep(1000l);
-            } finally {
-                reentrantLock.unlock();
+            for (int i = 0; i < 10; i++) {
+//                System.out.println("thread - 1 - " + i + " - waiting");
+                reentrantLock.lock();
+                try {
+                    System.out.println("thread - 1 - " + i + " - enter");
+                    TestUtil.sleep(1000l);
+                } finally {
+                    reentrantLock.unlock();
+                }
             }
         }).start();
         new Thread(() -> {
-            reentrantLock.lock();
-            try {
-                System.out.println("wait");
-                TestUtil.sleep(1000l);
-            } finally {
-                reentrantLock.unlock();
+            for (int i = 0; i < 10; i++) {
+//                System.out.println("thread - 2 - " + i + " - waiting");
+                reentrantLock.lock();
+                try {
+                    System.out.println("thread - 2 - " + i + " - enter");
+                    TestUtil.sleep(1000l);
+                } finally {
+                    reentrantLock.unlock();
+                }
+            }
+        }).start();
+        new Thread(() -> {
+            for (int i = 0; i < 10; i++) {
+//                System.out.println("thread - 3 - " + i + " - waiting");
+                reentrantLock.lock();
+                try {
+                    System.out.println("thread - 3 - " + i + " - enter");
+                    TestUtil.sleep(1000l);
+                } finally {
+                    reentrantLock.unlock();
+                }
             }
         }).start();
         CyclicBarrier barrier = new CyclicBarrier(1);
