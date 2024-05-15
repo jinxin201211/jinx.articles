@@ -2,7 +2,6 @@ package com.jinx.test;
 
 import com.jinx.tool.JinxLogger;
 import com.jinx.tool.LoggerFactory;
-import com.jinx.tool.TestUtil;
 
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -13,13 +12,15 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class VPNPingTest {
     private final static JinxLogger log = LoggerFactory.getLogger(VPNPingTest.class);
 
-    private static volatile boolean found = false;
+    private static final AtomicBoolean found = new AtomicBoolean(false);
 
-    private static final int CONCURRENT_NUMBER = 24;
+    private static final int CONCURRENT_NUMBER = 10;
 
     private static final short MIN_HOST = 0;
 
@@ -27,14 +28,13 @@ public class VPNPingTest {
 
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newFixedThreadPool(CONCURRENT_NUMBER);
-        List<CompletableFuture<Boolean>> futures = new ArrayList<>();
         List<String> ips = readHistory();
         Collections.reverse(ips);
         List<String> newIps = new ArrayList<>();
         for (int i = MIN_HOST; i <= MAX_HOST; i++) {
             for (int j = 1; j <= 255; j++) {
                 String ip = "11.16." + i + "." + j;
-                if (!ips.contains(ip)) {
+                if (!ips.contains(ip) && !"11.16.1.218".equals(ip)) {
                     newIps.add(ip);
                 }
             }
@@ -42,32 +42,28 @@ public class VPNPingTest {
         Collections.shuffle(newIps);
         ips.addAll(newIps);
         for (String ip : ips) {
-            futures.add(CompletableFuture.supplyAsync(() -> {
-                found = ping(ip);
-                if (found) {
-                    writeHistory(ip);
+            CompletableFuture.supplyAsync(() -> {
+                if (!found.get()) {
+                    boolean isFound = ping(ip);
+                    if (isFound) {
+                        found.set(true);
+                        log.info("找到了...");
+                        writeHistory(ip);
+                    }
                 }
                 return found;
-            }, executorService));
+            }, executorService);
         }
-
-        ExecutorService checkFoundThread = Executors.newSingleThreadExecutor();
-        checkFoundThread.execute(() -> {
-            //先让此线程暂停1秒，防止第一个就连接成功，导致后续判断不到
-            TestUtil.sleep(1000L);
-            while (!found) {
-                TestUtil.sleep(1000L);
-            }
-            log.info("找到了，正在停止其他线程...");
-            for (CompletableFuture<Boolean> future2 : futures) {
-                if (future2 != null && !future2.isDone()) {
-                    future2.cancel(true);
-                }
-            }
-            log.info("找到了，已停止其他线程...");
-        });
-        checkFoundThread.shutdown();
         executorService.shutdown();
+
+        try {
+            if (!executorService.awaitTermination(60, TimeUnit.SECONDS)) { // 等待一段时间确保任务完成
+                executorService.shutdownNow(); // 强制关闭
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // 恢复中断状态
+            executorService.shutdownNow(); // 强制关闭
+        }
     }
 
     private static boolean ping(String ip) {
