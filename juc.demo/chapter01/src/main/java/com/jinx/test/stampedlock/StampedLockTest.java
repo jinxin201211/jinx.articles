@@ -45,6 +45,7 @@ public class StampedLockTest {
             System.out.println(Thread.currentThread().getName() + "\t被修改");
             long stamp2 = stampedLock.readLock();
             try {
+                System.out.println(Thread.currentThread().getName() + "\t升级为悲观锁");
                 System.out.println(Thread.currentThread().getName() + "\t" + number);
             } finally {
                 stampedLock.unlockRead(stamp2);
@@ -62,8 +63,8 @@ public class StampedLockTest {
         new Thread(() -> {
             stampedLockTest.write();
         }, "write").start();
-        new Thread(() -> {
-            stampedLockTest.optimisticRead();
-        }, "read 2").start();
+//        new Thread(() -> {
+//            stampedLockTest.read();
+//        }, "read 2").start();
     }
 }
