@@ -1,3 +1,5 @@
+import java.time.Year
+
 class ConditionTreeKt {
     fun level(point: Int): String {
         return when (point) {
@@ -14,24 +16,32 @@ class ConditionTreeKt {
 }
 
 fun main() {
-    val point = 100;
-    val message = if (point == 100) "gorgeous" else "excellent";
-    println(message)
+//    val point = 100;
+//    val message = if (point == 100) "gorgeous" else "excellent";
+//    println(message)
+//
+//    println("\$message = $message ${message + message}")
+//
+//    for (i in 1 until 3) {
+//        println(i)
+//    }
+//
+//    println(3 in 1 until 3)
+//    println(3 in 3 downTo 1)
+//    println(3 in 1..3)
+//    println(3 !in 1..3)
+//
+//    var conditionTreeKt = ConditionTreeKt();
+//    for (i in 1..100) {
+//        println(i.toString() + "\t" + conditionTreeKt.level(i))
+//    }
+//    println(conditionTreeKt.castFireball(3))
+//
+//    val unique = setOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+//    unique.forEach { p -> run { val num = p + p; println(num); } }
 
-    println("\$message = $message ${message + message}")
-
-    for (i in 1 until 3) {
-        println(i)
-    }
-
-    println(3 in 1 until 3)
-    println(3 in 3 downTo 1)
-    println(3 in 1..3)
-    println(3 !in 1..3)
-
-    var conditionTreeKt = ConditionTreeKt();
-    for (i in 1..100) {
-        println(i.toString() + "\t" + conditionTreeKt.level(i))
-    }
-    println(conditionTreeKt.castFireball(3))
+    println({
+        val year = Year.now().value;
+        "hello, $year"
+    }())
 }

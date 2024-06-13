@@ -109,3 +109,25 @@ Unit 表示一个函数不返回任何东西，同时，也能兼容需要和一
 ## Nothing
 
 类似于 Unit，Nothing 类型的函数也不返回任何东西。但这是它们唯一相同的地方。在编译器看来，Nothing 就意味着函数不可能成功执行完成，它要么抛出异常，要么因某个原因再也返不回调用处。
+
+# 匿名函数与函数类型
+
+---
+- 匿名类型：
+``` kotlin
+fun main(args: Array<String>) { 
+  val greetingFunction: () -> String = {
+    val currentYear = 2018
+    "Welcome to SimVillage, Mayor! (copyright $currentYear)"
+  }
+  println(greetingFunction())
+} 
+
+```
+---
+
+> 和具名函数不一样，除了极少数的情况外，匿名函数不需要 return 关键字来返回数据。<br>
+没有 return 关键字，为了返回数据，匿名函数会隐式或自动返回函数体最后一行语句的结果。<br>
+之所以不能用 return 关键字，是因为编译器不知道返回数据究竟是来自调用匿名函数的函数，还是匿名函数本身。
+
+> 定义只有一个参数的匿名函数时，可以使用 it 关键字来表示参数名。
