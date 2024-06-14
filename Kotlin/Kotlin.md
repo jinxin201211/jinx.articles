@@ -115,14 +115,13 @@ Unit 表示一个函数不返回任何东西，同时，也能兼容需要和一
 ---
 - 匿名类型：
 ``` kotlin
-fun main(args: Array<String>) { 
+fun main(args: Array<String>) {
   val greetingFunction: () -> String = {
     val currentYear = 2018
     "Welcome to SimVillage, Mayor! (copyright $currentYear)"
   }
   println(greetingFunction())
-} 
-
+}
 ```
 ---
 
