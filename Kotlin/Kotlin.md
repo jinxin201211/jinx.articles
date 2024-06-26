@@ -145,3 +145,20 @@ fun main(args: Array<String>) {
 | error | 如果参数值为 `null`，则抛出 `IllegalStateException` 异常并输出错误信息，否则返回非 `null` 值 |
 | assert | 如果参数值为 `false`，则抛出 `AssertionError` 异常，并打上断言编译器标记 |
 
+## 标准库函数
+
+![apply,let,run,with,also](/imgs/kotlin/a97360c74831491d82bba23deb2ca958.jfif)
+
+| 函 数 | 是否传receiver值给lambda | 是否有相关作用域 | 返 回 |
+| --- | --- | --- | --- |
+| let | 是 | 否 | lambda结果 |
+| apply | 否 | 是 | 接收者对象 |
+| run | 否 | 是 | lambda结果 |
+| with | 否 | 是 | lambda结果 |
+| also | 是 | 否 | 接收者对象 |
+| takeIf | 是 | 否 | 可空类型接收者对象 |
+| takeUnless | 是 | 否 | 可空类型接收者对象 |
+
+> run 函数的另一版本（不常用）无需接收者，不传递接收者值参，没有作用域限制，返回 lambda 结果值。
+
+> 不能以 hello.with {..}这样的方式调用 with 函数，正确的调用方式像这样：with ("hello"){..}，这里，第一个值参就是接收者，第二个是 lambda 表达式。鉴于其独特性，建议尽量避免使用它。
