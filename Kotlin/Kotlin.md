@@ -162,3 +162,14 @@ fun main(args: Array<String>) {
 > run 函数的另一版本（不常用）无需接收者，不传递接收者值参，没有作用域限制，返回 lambda 结果值。
 
 > 不能以 hello.with {..}这样的方式调用 with 函数，正确的调用方式像这样：with ("hello"){..}，这里，第一个值参就是接收者，第二个是 lambda 表达式。鉴于其独特性，建议尽量避免使用它。
+
+## List解构
+
+```kotlin
+
+val (type, name, price) = menuData.split(',') 
+
+// 使用_过滤不想要的元素
+val (goldMedal, _, bronzeMedal) = patronList 
+
+```
