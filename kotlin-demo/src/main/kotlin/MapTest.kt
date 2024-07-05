@@ -1,4 +1,9 @@
-class MapTest {
+class MapTest(s: String, s1: String, i: Int) {
+    var firstname: String = s;
+
+    var lastname: String = s1;
+
+    var age: Int = i;
 }
 
 fun main() {
@@ -9,11 +14,14 @@ fun main() {
 //    println(patronGold["Mordocx"])
 //    println(patronGold.getOrDefault("mordocxxx", 123.0))
 
-    println(patronGold["mordocxxx"])
-    println(patronGold.getOrElse("mordocxxx", { patronGold += "mordocxxx" to 123.0 }));
-    println(patronGold["mordocxxx"])
+//    println(patronGold["mordocxxx"])
+//    println(patronGold.getOrElse("mordocxxx", { patronGold += "mordocxxx" to 123.0 }));
+//    println(patronGold["mordocxxx"])
+//
+//    println(patronGold["mordocxxxx"])
+//    println(patronGold.getOrPut("mordocxxxx", { 123.0 }));
+//    println(patronGold["mordocxxxx"])
 
-    println(patronGold["mordocxxxx"])
-    println(patronGold.getOrPut("mordocxxxx", { 123.0 }));
-    println(patronGold["mordocxxxx"])
+    var mapTest = MapTest("Tom", "Cruise", 48);
+    println("${mapTest.firstname} ${mapTest.lastname}:\t${mapTest.age}");
 }
