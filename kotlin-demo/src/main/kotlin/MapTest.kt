@@ -1,13 +1,8 @@
-class MapTest(s: String, s1: String, i: Int) {
-    var firstname: String = s;
-
-    var lastname: String = s1;
-
-    var age: Int = i;
+class MapTest(var firstname: String, var lastname: String, var age: Int) {
 }
 
 fun main() {
-    val patronGold = mutableMapOf<String, Double>("Eli" to 10.5, "Mordoc" to 8.0, "Sophie" to 5.5);
+    val patronGold = mutableMapOf("Eli" to 10.5, "Mordoc" to 8.0, "Sophie" to 5.5);
     patronGold += "Mordocx" to 20.2;
     patronGold += "Mordocx" to 10.2;
 //    println(patronGold.get("Mordocx")?.times(1.0))
