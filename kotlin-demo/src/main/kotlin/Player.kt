@@ -1,4 +1,4 @@
-class Player(_name: String, val health: Int) {
+open class Player(_name: String, val health: Int) {
     val race = "DWARF"
     var town = "Bavaria"
     val name = _name
