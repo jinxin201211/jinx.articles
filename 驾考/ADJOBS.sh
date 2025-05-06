@@ -39,17 +39,19 @@ function patrol() {
   sleep 1;
   #快速巡逻
   quickPatrol=1;
-  while ((quickPatrol<3))
+  while ((quickPatrol<=3))
   do
     log "快速巡逻第 $quickPatrol 轮"
     log "点击快速巡逻";
     tap 356 1810;
     sleep 1;
+    log "等待巡逻奖励加载...";
+    sleep 3;
     log "关闭巡逻奖励";
     tap 588 2074; #TODO
     sleep 1;
     quickPatrol=`expr $quickPatrol + 1`;
-  done;
+  done
 
   log "关闭巡逻车";
   tap 588 2074;
@@ -61,14 +63,14 @@ function patrol() {
 
   #广告巡逻
   adPatrol=1;
-  while ((adPatrol<5))
+  while ((adPatrol<=5))
   do
     log "广告巡逻第 $adPatrol 轮";
     log "点击观看广告";
     tap 356 1810;
     advertise;
     adPatrol=`expr $adPatrol + 1`;
-  done;
+  done
 
   log "关闭巡逻车";
   tap 588 2074;
@@ -129,7 +131,7 @@ function activity() {
   log "点击特惠礼包";
   tap 968 2299;
   sleep 1;
-  log "点击金币免费";
+  log "点击体力免费";
   tap 891 849;
   sleep 1;
   advertise;
@@ -138,15 +140,15 @@ function activity() {
   sleep 1;
 }
 
-#军团任务 军团 845 2263  -> 军团捐献 905 1582 -> 371 1687 -> 滑动30s -> 关闭广告 -> 关闭奖励 614 1932 -> 关闭军团贡献 614 1932
-function legion(){
+#军团任务
+function legion() {
   log "点击军团";
   tap 845 2263;
   sleep 1;
   log "点击军团捐献";
   tap 905 1582;
   sleep 1;
-  log "点击*******";
+  log "点击1/1";
   tap 371 1687;
   sleep 1;
   advertise;
@@ -189,11 +191,11 @@ activity;
 legion;
 log "114任务完成";
 
-switch332
-patrol;
-chickenLeg;
-mall;
-activity;
-log "332任务完成";
+# switch332
+# patrol;
+# chickenLeg;
+# mall;
+# activity;
+# log "332任务完成";
 
 log "所有任务完成";
