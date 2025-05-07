@@ -20,7 +20,7 @@ done
 
 i=0;
 
-while (true)
+while [[ 1+1 ]]
 do
   log "round $i";
   tap 546 2011;
