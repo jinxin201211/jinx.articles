@@ -189,7 +189,7 @@ chickenLeg;
 mall;
 activity;
 legion;
-log "114任务完成";
+# log "114任务完成";
 
 # switch332
 # patrol;
