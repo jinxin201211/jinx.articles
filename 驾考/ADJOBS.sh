@@ -38,7 +38,7 @@ function patrol() {
   tap 117 1929;
   sleep 1;
   #快速巡逻
-  quickPatrol=1;
+  quickPatrol=4;
   while ((quickPatrol<=3))
   do
     log "快速巡逻第 $quickPatrol 轮"
@@ -115,6 +115,72 @@ function mall() {
   advertise;
 }
 
+#观影宝藏
+function videoTreasure() {
+  log "点击战斗";
+  tap 499 2303;
+  sleep 1;
+  log "左侧栏滑动到底";
+  adb shell input swipe 65 1230 65 0;
+  sleep 1;
+  adb shell input swipe 65 1230 65 0;
+  sleep 1;
+  #再向上滑动一些
+  adb shell input swipe 72 859 72 960;
+  sleep 1;
+  log "点击观影宝藏";
+  tap 75 635;
+  sleep 1;
+
+  #观影
+  adVideoTreasure=1;
+  while ((adVideoTreasure<=5))
+  do
+    log "观影第 $adVideoTreasure 轮";
+    log "点击5/5";
+    tap 545 1987;
+    advertise;
+    adVideoTreasure=`expr $adVideoTreasure + 1`;
+  done
+
+  log "退出观影宝藏";
+  tap 97 2308;
+  sleep 1;
+}
+
+#观影宝藏
+function videoTreasure2() {
+  log "点击战斗";
+  tap 499 2303;
+  sleep 1;
+  log "左侧栏滑动到底";
+  adb shell input swipe 65 1230 65 0;
+  sleep 1;
+  adb shell input swipe 65 1230 65 0;
+  sleep 1;
+  #再向上滑动一些
+  adb shell input swipe 72 859 72 1040;
+  sleep 1;
+  log "点击观影宝藏";
+  tap 75 635;
+  sleep 1;
+
+  #观影
+  adVideoTreasure=1;
+  while ((adVideoTreasure<=5))
+  do
+    log "观影第 $adVideoTreasure 轮";
+    log "点击5/5";
+    tap 545 1987;
+    advertise;
+    adVideoTreasure=`expr $adVideoTreasure + 1`;
+  done
+
+  log "退出观影宝藏";
+  tap 97 2308;
+  sleep 1;
+}
+
 #活动奖励
 function activity() {
   log "点击战斗";
@@ -184,18 +250,20 @@ function switch114() {
 }
 
 # switch114;
-patrol;
-chickenLeg;
-mall;
-activity;
-legion;
+# patrol;
+# videoTreasure2;
+# chickenLeg;
+# mall;
+# activity;
+# legion;
 # log "114任务完成";
 
 # switch332
 # patrol;
-# chickenLeg;
-# mall;
-# activity;
-# log "332任务完成";
+videoTreasure2;
+chickenLeg;
+mall;
+activity;
+log "332任务完成";
 
 log "所有任务完成";
