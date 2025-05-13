@@ -126,7 +126,7 @@ function videoTreasure() {
   adb shell input swipe 65 1230 65 0;
   sleep 1;
   #再向上滑动一些
-  adb shell input swipe 72 859 72 960;
+  adb shell input swipe 72 859 72 900;
   sleep 1;
   log "点击观影宝藏";
   tap 75 635;
@@ -158,13 +158,12 @@ function videoTreasure2() {
   sleep 1;
   adb shell input swipe 65 1230 65 0;
   sleep 1;
-  #再向上滑动一些
-  adb shell input swipe 72 859 72 900;
-  # adb shell input swipe 72 859 72 1040;
-  # adb shell input swipe 72 859 72 1040;
-  sleep 1;
+  # log 再向上滑动一些
+  # adb shell input swipe 72 859 72 900;
+  # sleep 1;
   log "点击观影宝藏";
-  tap 75 635;
+  # tap 75 635;
+  tap 75 700;
   sleep 1;
 
   #观影
@@ -261,11 +260,11 @@ function switch114() {
 # log "114任务完成";
 
 # switch332
-patrol;
+# patrol;
 videoTreasure2;
-chickenLeg;
-mall;
-activity;
+# chickenLeg;
+# mall;
+# activity;
 log "332任务完成";
 
 log "所有任务完成";
