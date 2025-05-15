@@ -128,7 +128,7 @@ function videoTreasure() {
   #再向上滑动一些
   # adb shell input swipe 72 859 72 900;
   # adb shell input swipe 72 859 72 960;
-  adb shell input swipe 72 859 72 1040;
+  adb shell input swipe 72 859 72 1030;
   sleep 1;
   log "点击观影宝藏";
   tap 75 635;

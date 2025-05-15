@@ -15,10 +15,10 @@ function backspace() {
   adb shell input keyevent 4;
 }
 
-zdddx=868;
-zdddy=1815;
-# zdddx=840;
-# zdddy=1713;
+# zdddx=868;
+# zdddy=1815;
+zdddx=840;
+zdddy=1713;
 
 i=100;
 while ((i<=15))
@@ -56,7 +56,7 @@ do
 
 done
 
-j=100;
+j=1;
 while ((j<=5))
 do
   log "第二行第 $j 轮";
