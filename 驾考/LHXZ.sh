@@ -15,7 +15,7 @@ function backspace() {
   adb shell input keyevent 4;
 }
 
-j=30;
+j=2;
 while ((j<=50))
 do
   log "第 $j 轮";

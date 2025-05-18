@@ -16,7 +16,8 @@ function backspace() {
 }
 
 log "点击我的";
-tap 977 2285;
+tap 977 1490;
+# tap 977 1397;
 sleep 1;
 
 log "点击互动游戏";

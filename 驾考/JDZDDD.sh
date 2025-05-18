@@ -15,12 +15,12 @@ function backspace() {
   adb shell input keyevent 4;
 }
 
-# zdddx=868;
-# zdddy=1815;
+# zdddx=890;
+# zdddy=1906;
 zdddx=840;
-zdddy=1713;
+zdddy=1813;
 
-i=100;
+i=1;
 while ((i<=15))
 do
   log "第一行第 $i 轮";

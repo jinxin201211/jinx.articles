@@ -254,20 +254,20 @@ function switch114() {
 }
 
 # switch114;
-# patrol;
+patrol;
 # videoTreasure;
-# chickenLeg;
-# mall;
-# activity;
-# legion;
+chickenLeg;
+mall;
+activity;
+legion;
 # log "114任务完成";
 
 # switch332
 # patrol;
-videoTreasure2;
-chickenLeg;
-mall;
-activity;
-log "332任务完成";
+# videoTreasure2;
+# chickenLeg;
+# mall;
+# activity;
+# log "332任务完成";
 
 log "所有任务完成";
