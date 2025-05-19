@@ -15,22 +15,23 @@ function backspace() {
   adb shell input keyevent 4;
 }
 
-j=2;
+j=30;
 while ((j<=50))
 do
   log "第 $j 轮";
 
   tap 534 2275;
-  sleep 6;
+  tap 534 2275;
+  sleep 3;
 
   tap 891 2107;
-  sleep 1;
+  sleep 0.3;
 
   tap 891 2107;
-  sleep 1;
+  sleep 0.3;
 
   tap 175 2105;
-  sleep 1;
+  sleep 0.3;
 
   tap 175 2105;
   sleep 1;
