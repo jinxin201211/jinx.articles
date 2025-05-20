@@ -15,11 +15,10 @@ function backspace() {
   adb shell input keyevent 4;
 }
 
-# zdddx=890;
-# zdddy=1906;
-zdddx=840;
-zdddy=1813;
-
+zdddx=890;
+zdddy=1805;
+# zdddx=840;
+# zdddy=1813;
 
 function others1() {
   i=1;
