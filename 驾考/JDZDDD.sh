@@ -303,8 +303,8 @@ function collect() {
 }
 
 
-others1;
-others2;
-channel;
-shop;
+# others1;
+# others2;
+# channel;
+# shop;
 collect;

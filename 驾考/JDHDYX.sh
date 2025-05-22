@@ -16,12 +16,12 @@ function backspace() {
 }
 
 log "点击我的";
-tap 977 1490;
-# tap 977 1397;
+tap 977 2292;
 sleep 1;
 
 log "点击互动游戏";
 tap 853 1259;
+# tap 853 1378;
 sleep 3;
 
 log "点击签到";
