@@ -271,12 +271,12 @@ function shop() {
 
 function collect() {
   #收取
-  log "点击我的";
-  tap 977 2285;
-  sleep 1;
-  log "点击种豆得豆";
-  tap $zdddx $zdddy;
-  sleep 2;
+  # log "点击我的";
+  # tap 977 2285;
+  # sleep 1;
+  # log "点击种豆得豆";
+  # tap $zdddx $zdddy;
+  # sleep 2;
   k=0;
   while ((k<=20))
   do
