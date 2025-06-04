@@ -37,6 +37,6 @@ do
   tap 175 2105;
   sleep 1;
 
-  j=`expr $j + 1`;
+  ((j++))
 
 done

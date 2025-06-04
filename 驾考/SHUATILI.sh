@@ -14,7 +14,7 @@ waiting=5;
 while ((waiting>0))
 do
   log "请在 $waiting s内打开主界面";
-  waiting=`expr $waiting - 1`;
+  ((waiting++))
   sleep 1;
 done
 
@@ -34,7 +34,7 @@ do
   log "关闭小程序";
   tap 980 165; #关闭小程序
   sleep 5;
-  i=`expr $i + 1`;
+  ((i++))
   sleep 1;
 done
     

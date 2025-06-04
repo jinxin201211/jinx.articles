@@ -14,6 +14,9 @@ i=0;
 while [[ 1+1 ]]
 do
   log "round $i";
-  adb shell "input tap 86 2300;input tap 86 2300;input tap 990 2300;input tap 1058 1873;input tap 810 734;input tap 1013 549;"
-  i=`expr $i + 1`;
+  # if (( i % 100 == 0 )); then
+  #    adb shell "input tap 86 2300;sleep 3s;input tap 86 2300;input tap 545 2000;input tap 86 2300;input tap 86 2300;input tap 990 2300;"
+  # fi
+  adb shell "input tap 1058 1873;input tap 810 734;input tap 1013 549;"
+  ((i++))
 done

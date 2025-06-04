@@ -38,7 +38,7 @@ do
   log "点击返回";
   backspace;
   sleep 3;
-  i=`expr $i + 1`;
+  ((i++))
 done
 
 log "点击领取";

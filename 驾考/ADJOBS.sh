@@ -50,7 +50,7 @@ function patrol() {
     log "关闭巡逻奖励";
     tap 588 2074; #TODO
     sleep 1;
-    quickPatrol=`expr $quickPatrol + 1`;
+    ((quickPatrol++))
   done
 
   log "关闭巡逻车";
@@ -69,7 +69,7 @@ function patrol() {
     log "点击观看广告";
     tap 356 1810;
     advertise;
-    adPatrol=`expr $adPatrol + 1`;
+    ((adPatrol++))
   done
 
   log "关闭巡逻车";
@@ -145,7 +145,7 @@ function videoTreasure() {
     log "点击5/5";
     tap 545 1987;
     advertise;
-    adVideoTreasure=`expr $adVideoTreasure + 1`;
+    ((adVideoTreasure++))
   done
 
   log "退出观影宝藏";
@@ -180,7 +180,7 @@ function videoTreasure2() {
     log "点击5/5";
     tap 545 1987;
     advertise;
-    adVideoTreasure=`expr $adVideoTreasure + 1`;
+    ((adVideoTreasure++))
   done
 
   log "退出观影宝藏";

@@ -14,7 +14,7 @@ waiting=10;
 while ((waiting>0))
 do
   log "请在 $waiting s内打开分解界面";
-  waiting=`expr $waiting - 1`;
+  ((waiting++))
   sleep 1;
 done
 
@@ -38,7 +38,7 @@ do
   tap 550 2115;
   sleep 1;
   tap 588 2294;
-  i=`expr $i + 1`;
+  ((i++))
   # sleep 1;
 done
     

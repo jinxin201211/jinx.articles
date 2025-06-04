@@ -53,7 +53,7 @@ function others1() {
     backspace;
     sleep 0.2;
 
-    i=`expr $i + 1`;
+    ((i++))
 
   done
 }
@@ -92,7 +92,7 @@ function others2() {
     backspace;
     sleep 0.2;
     
-    j=`expr $j + 1`;
+    ((j++))
 
   done
 }
@@ -297,7 +297,7 @@ function collect() {
     tap 1008 650;
     sleep 0.2;
 
-    k=`expr $k + 1`;
+    ((k++))
 
   done
 }

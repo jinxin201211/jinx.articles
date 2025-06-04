@@ -20,7 +20,7 @@ do
   while ((second>0))
   do
     log "等待 $second 秒游戏界面加载完成...";
-    second=`expr $second - 1`;
+    ((second++))
     sleep 1;
   done
   
@@ -31,6 +31,6 @@ do
   log "关闭游戏";
   tap 1000 167;
 
-  round=`expr $round + 1`;
+  ((round++))
   sleep 1;
 done

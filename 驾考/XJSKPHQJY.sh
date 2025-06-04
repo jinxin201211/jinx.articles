@@ -25,6 +25,6 @@ do
   log "接受失败时关闭组队邀请窗口";
   tap 1013 549;
   sleep 0.01;
-  i=`expr $i + 1`;
+  ((i++))
   # sleep 0.2;
 done
