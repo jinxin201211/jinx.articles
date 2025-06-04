@@ -126,8 +126,8 @@ function videoTreasure() {
   adb shell input swipe 65 1230 65 0;
   sleep 1;
   #再向上滑动一些
-  # adb shell input swipe 72 859 72 900;
-  adb shell input swipe 72 859 72 960;
+  adb shell input swipe 72 859 72 900;
+  # adb shell input swipe 72 859 72 960;
   # adb shell input swipe 72 859 72 1010;
   # adb shell input swipe 72 859 72 1030;
   # adb shell input swipe 72 859 72 1060;
@@ -258,7 +258,7 @@ function switch114() {
 
 # switch114;
 patrol;
-videoTreasure;
+# videoTreasure;
 # videoTreasure2;
 chickenLeg;
 mall;
