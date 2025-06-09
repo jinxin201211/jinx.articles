@@ -20,7 +20,7 @@ do
   while ((second>0))
   do
     log "等待 $second 秒游戏界面加载完成...";
-    ((second++))
+    ((second--))
     sleep 1;
   done
   

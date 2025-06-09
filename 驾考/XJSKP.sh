@@ -14,7 +14,7 @@ waiting=20;
 while ((waiting>0))
 do
   log "请在 $waiting s内打开主界面";
-  ((waiting++))
+  ((waiting--))
   sleep 1;
 done
 

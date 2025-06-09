@@ -258,7 +258,7 @@ function switch114() {
 
 # switch114;
 patrol;
-# videoTreasure;
+videoTreasure;
 # videoTreasure2;
 chickenLeg;
 mall;
