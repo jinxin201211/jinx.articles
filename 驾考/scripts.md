@@ -5,3 +5,9 @@ sh D:\\CUIT\\Java\\jinx.articles\\驾考\\ADJOBS.sh
 sh D:\\CUIT\\Java\\jinx.articles\\驾考\\JDZDDD.sh
 
 sh D:\\Repository\\jinx.articles\\驾考\\XJSKPJYG.sh
+
+802
+592
+482
+363
+244
