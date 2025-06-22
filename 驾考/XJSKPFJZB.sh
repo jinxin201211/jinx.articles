@@ -14,7 +14,7 @@ waiting=10;
 while ((waiting>0))
 do
   log "请在 $waiting s内打开分解界面";
-  ((waiting++))
+  ((waiting--))
   sleep 1;
 done
 
