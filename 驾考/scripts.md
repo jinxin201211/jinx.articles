@@ -3,13 +3,20 @@ adb connect 192.168.124.19
 sh D:\\CUIT\\Java\\jinx.articles\\驾考\\JDHDYX.sh
 sh D:\\CUIT\\Java\\jinx.articles\\驾考\\ADJOBS.sh
 sh D:\\CUIT\\Java\\jinx.articles\\驾考\\JDZDDD.sh
+sh D:\\CUIT\\Java\\jinx.articles\\驾考\\XJSKPJYG.sh
 
 sh D:\\Repository\\jinx.articles\\驾考\\XJSKPJYG.sh
 
-802
-592
-482
-363
-244
-124
+802  
+592  
+482  
+363  
+244  
+124  
 62
+
+李  
+席和悌  
+况雨伯  
+退游急先锋  
+~~车光启~~
