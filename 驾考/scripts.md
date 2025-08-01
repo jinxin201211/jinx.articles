@@ -1,4 +1,5 @@
 adb connect 192.168.124.19
+adb connect 192.168.1.110
 
 sh D:\\CUIT\\Java\\jinx.articles\\驾考\\JDHDYX.sh
 sh D:\\CUIT\\Java\\jinx.articles\\驾考\\ADJOBS.sh
@@ -24,6 +25,7 @@ sh D:\\Repository\\jinx.articles\\驾考\\XJSKPJYG.sh
 LBY888  
 玫玫  
 LZH17  
+东门俊语  
 ~~车光启~~
 
  * 18阶彩色普通装备攻击: 684 * 6 = 4104;
