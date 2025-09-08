@@ -9,7 +9,7 @@ function tap() {
 
 echo "start ...";
 
-waiting=20;
+waiting=5;
 
 while ((waiting>0))
 do
@@ -23,16 +23,21 @@ i=0;
 while [[ 1+1 ]]
 do
   log "round $i";
-  tap 546 2011; #开始游戏、返回
+  log "开始游戏、返回";
+  tap 596 2000; #开始游戏、返回
   sleep 1;
+  log "选择词条";
   tap 540 1249; #选择词条
-  sleep 1;
+  sleep 0.3;
+  log "重新连接";
   tap 611 1542; #重新连接
-  sleep 1;
+  sleep 0.3;
+  log "继续战斗";
   tap 594 2068; #继续战斗
-  sleep 1;
-  tap 546 2011; #开始游戏、返回
+  sleep 0.3;
+  log "开始游戏、返回";
+  tap 596 2000; #开始游戏、返回
   ((i++))
-  sleep 6;
+  sleep 5;
 done
     
