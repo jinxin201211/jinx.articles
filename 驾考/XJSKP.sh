@@ -38,6 +38,6 @@ do
   log "开始游戏、返回";
   tap 596 2000; #开始游戏、返回
   ((i++))
-  sleep 5;
+  sleep 2;
 done
     
