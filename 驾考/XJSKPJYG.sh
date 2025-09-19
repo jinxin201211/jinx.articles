@@ -11,12 +11,12 @@ echo "start ...";
 
 round=0;
 
-while ((round<50))
+while ((round<100))
 do
   log "精英关第 $round 轮";
   log "点击向僵尸开炮游戏图标";
   tap 942 627;
-  second=15;
+  second=18;
   while ((second>0))
   do
     log "等待 $second 秒游戏界面加载完成...";
